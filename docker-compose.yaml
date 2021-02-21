@@ -1,0 +1,36 @@
+services:
+    app:
+        image: fabricon-app:local
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile
+        environment:
+            APP_ENV: dev
+            OPCACHE_VALIDATE_TIMESTAMPS: 1
+        volumes:
+            - .:/var/www/html:rw,cached
+        depends_on:
+            - db
+    web:
+        image: fabricon-web:local
+        build:
+            args:
+                ASSETS_IMAGE: fabricon-app:local
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile
+        ports:
+            - 8000:80
+        depends_on:
+            - app
+        volumes:
+            - ./public:/var/www/html/public:ro,delegated
+    db:
+        image: postgres:13-alpine
+        environment:
+            POSTGRES_PASSWORD: fabricon_password
+            POSTGRES_USER: fabricon_user
+            POSTGRES_DB: fabricon_db
+        volumes:
+            - db-data:/var/lib/postgresql/data
+volumes:
+    db-data: {}
