@@ -8,9 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home', host: '{year<202[0-1]>?2021}.%app.base_host%')]
-    public function index(int $year): Response
+    #[Route('/', name: 'app_home')]
+    public function index(): Response
     {
-        return $this->render('home/index.html.twig', compact('year'));
+        return $this->render('home/index.html.twig');
     }
 }

@@ -4,7 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Admin;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\FilterDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class AdminCrudController extends AbstractCrudController
@@ -23,5 +25,10 @@ class AdminCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('email');
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters->add('email');
     }
 }
