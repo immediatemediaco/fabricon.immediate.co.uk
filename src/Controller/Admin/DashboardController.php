@@ -6,7 +6,6 @@ use App\Entity\Admin;
 use App\Entity\Conference;
 use App\Entity\Person;
 use App\Entity\Slot;
-use App\Entity\Speaker;
 use App\Entity\Talk;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;

@@ -43,6 +43,12 @@ class Slot
      */
     private ?string $breakDetails;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Conference::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private ?Conference $conference;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +110,18 @@ class Slot
     public function setBreakDetails(?string $breakDetails): self
     {
         $this->breakDetails = $breakDetails;
+
+        return $this;
+    }
+
+    public function getConference(): ?Conference
+    {
+        return $this->conference;
+    }
+
+    public function setConference(?Conference $conference): self
+    {
+        $this->conference = $conference;
 
         return $this;
     }

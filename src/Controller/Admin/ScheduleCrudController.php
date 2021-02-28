@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Slot;
+use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -32,6 +33,12 @@ class ScheduleCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        yield FormField::addPanel('Conference Details')
+            ->setIcon('fa fa-calendar-day');
+        yield AssociationField::new('conference', 'Conference')
+            ->setCustomOption(AssociationField::OPTION_QUERY_BUILDER_CALLABLE, [$this, 'conference'])
+            ->setRequired(true)
+            ->hideOnIndex();
         yield FormField::addPanel('Slot Details')
             ->setIcon('fa fa-clock');
         yield TimeField::new('startTime');
@@ -43,5 +50,11 @@ class ScheduleCrudController extends AbstractCrudController
         yield FormField::addPanel('Break Details')
             ->setIcon('fa fa-mug-hot');
         yield ChoiceField::new('breakDetails')->setChoices(array_combine(self::$breaks, self::$breaks));
+    }
+
+    public function conference(QueryBuilder $queryBuilder): QueryBuilder
+    {
+        return $queryBuilder
+            ->addOrderBy('entity.id', 'DESC');
     }
 }
