@@ -40,6 +40,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Talks', 'fa fa-chalkboard-teacher', Talk::class);
         yield MenuItem::linkToCrud('People', 'fa fa-users', Person::class);
         yield MenuItem::linkToCrud('Admins', 'fa fa-users-cog', Admin::class);
-        yield MenuItem::linkToCrud('Settings', 'fa fa-gear', Settings::class);
+        yield MenuItem::linkToCrud('Settings', 'fa fa-gear', Settings::class)
+        ->setAction(Action::DETAIL)
+        ->setEntityId(1);
     }
 }
