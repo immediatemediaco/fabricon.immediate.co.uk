@@ -2,10 +2,18 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Conference;
+use App\Entity\Settings;
 use App\Entity\Slot;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -18,6 +26,8 @@ class ScheduleCrudController extends AbstractCrudController
         'Lunch break',
     ];
 
+    public function __construct(private EntityManagerInterface $em) {}
+
     public static function getEntityFqcn(): string
     {
         return Slot::class;
@@ -26,9 +36,21 @@ class ScheduleCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle(Crud::PAGE_INDEX, 'Schedule')
+            ->setPageTitle(Crud::PAGE_INDEX, [$this, 'indexPageTitle'])
             ->setDefaultSort(['startTime' => 'ASC'])
             ->setTimeFormat('H:mm');
+    }
+
+    public function createIndexQueryBuilder(
+        SearchDto $searchDto,
+        EntityDto $entityDto,
+        FieldCollection $fields,
+        FilterCollection $filters
+    ): QueryBuilder {
+        $queryBuilder = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
+        $queryBuilder->innerJoin(Settings::class, 's', Join::WITH, 'entity.conference = s.currentConference');
+
+        return $queryBuilder;
     }
 
     public function configureFields(string $pageName): iterable
@@ -56,5 +78,17 @@ class ScheduleCrudController extends AbstractCrudController
     {
         return $queryBuilder
             ->addOrderBy('entity.id', 'DESC');
+    }
+
+    public function indexPageTitle(): string
+    {
+        $qb = $this->em->createQueryBuilder()
+            ->select('c.name')
+            ->from(Conference::class, 'c')
+            ->innerJoin(Settings::class, 's', Join::WITH, 'c.id = s.currentConference');
+
+        $results = $qb->getQuery()->setMaxResults(1)->getOneOrNullResult();
+
+        return 'Schedule - ' . $results['name'];
     }
 }
