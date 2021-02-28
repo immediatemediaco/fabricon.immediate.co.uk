@@ -3,8 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Person;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -31,17 +29,6 @@ class PersonCrudController extends AbstractCrudController
             ->add(BooleanFilter::new('isModerator', 'Moderators'))
             ->add(BooleanFilter::new('isOrganiser', 'Organisers'))
             ->add(BooleanFilter::new('isSpeaker', 'Speakers'));
-    }
-
-    public function configureActions(Actions $actions): Actions
-    {
-        return $actions
-            ->update(Crud::PAGE_INDEX, Action::EDIT, static function (Action $action) {
-                return $action->setIcon('fas fa-edit');
-            })
-            ->update(Crud::PAGE_INDEX, Action::DELETE, static function (Action $action) {
-                return $action->setIcon('far fa-trash-alt')->setLabel(false);
-            });
     }
 
     public function configureFields(string $pageName): iterable

@@ -9,6 +9,8 @@ use App\Entity\Settings;
 use App\Entity\Slot;
 use App\Entity\Talk;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -29,6 +31,18 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()->setTitle('Fabric Conference');
     }
+
+    public function configureActions(): Actions
+    {
+        return parent::configureActions()
+            ->update(Crud::PAGE_INDEX, Action::EDIT, static function (Action $action) {
+                return $action->setIcon('fas fa-edit');
+            })
+            ->update(Crud::PAGE_INDEX, Action::DELETE, static function (Action $action) {
+                return $action->setIcon('far fa-trash-alt')->setLabel(false);
+            });
+    }
+
 
     public function configureMenuItems(): iterable
     {

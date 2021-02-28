@@ -3,8 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Conference;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -24,18 +22,6 @@ class ConferenceCrudController extends AbstractCrudController
         return $crud
             ->setPageTitle(Crud::PAGE_INDEX, 'Conferences');
     }
-
-    public function configureActions(Actions $actions): Actions
-    {
-        return $actions
-            ->update(Crud::PAGE_INDEX, Action::EDIT, static function (Action $action) {
-                return $action->setIcon('fas fa-edit');
-            })
-            ->update(Crud::PAGE_INDEX, Action::DELETE, static function (Action $action) {
-                return $action->setIcon('far fa-trash-alt')->setLabel(false);
-            });
-    }
-
 
     public function configureFields(string $pageName): iterable
     {
