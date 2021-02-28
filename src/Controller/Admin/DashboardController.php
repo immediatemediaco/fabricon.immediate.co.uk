@@ -5,8 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\Admin;
 use App\Entity\Conference;
 use App\Entity\Person;
+use App\Entity\Settings;
 use App\Entity\Slot;
 use App\Entity\Talk;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -38,5 +40,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Talks', 'fa fa-chalkboard-teacher', Talk::class);
         yield MenuItem::linkToCrud('People', 'fa fa-users', Person::class);
         yield MenuItem::linkToCrud('Admins', 'fa fa-users-cog', Admin::class);
+        yield MenuItem::linkToCrud('Settings', 'fa fa-gear', Settings::class);
     }
 }
