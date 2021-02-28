@@ -24,7 +24,6 @@ final class Version20210228185158 extends AbstractMigration
         $this->addSql('CREATE TABLE settings (id INT NOT NULL, current_conference_id INT DEFAULT NULL, track1_description TEXT DEFAULT NULL, track2_description TEXT DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_E545A0C571B53960 ON settings (current_conference_id)');
         $this->addSql('ALTER TABLE settings ADD CONSTRAINT FK_E545A0C571B53960 FOREIGN KEY (current_conference_id) REFERENCES conference (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE conference DROP is_current');
     }
 
     public function down(Schema $schema) : void
@@ -33,6 +32,5 @@ final class Version20210228185158 extends AbstractMigration
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('DROP SEQUENCE settings_id_seq CASCADE');
         $this->addSql('DROP TABLE settings');
-        $this->addSql('ALTER TABLE conference ADD is_current BOOLEAN DEFAULT NULL');
     }
 }
