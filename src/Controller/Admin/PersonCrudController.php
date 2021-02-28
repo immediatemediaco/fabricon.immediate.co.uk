@@ -28,9 +28,9 @@ class PersonCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
-            ->add(BooleanFilter::new('isModerator')->setLabel('Moderators'))
-            ->add(BooleanFilter::new('isOrganiser')->setLabel('Organisers'))
-            ->add(BooleanFilter::new('isSpeaker')->setLabel('Speakers'));
+            ->add(BooleanFilter::new('isModerator', 'Moderators'))
+            ->add(BooleanFilter::new('isOrganiser', 'Organisers'))
+            ->add(BooleanFilter::new('isSpeaker', 'Speakers'));
     }
 
     public function configureActions(Actions $actions): Actions
@@ -47,11 +47,9 @@ class PersonCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('name');
-        yield BooleanField::new('isModerator')->onlyOnForms();
-        yield BooleanField::new('isOrganiser')->onlyOnForms();
-        yield BooleanField::new('isSpeaker')->onlyOnForms();
+        yield BooleanField::new('isModerator', 'Moderator')->onlyOnForms();
+        yield BooleanField::new('isOrganiser', 'Organiser')->onlyOnForms();
+        yield BooleanField::new('isSpeaker', 'Speaker')->onlyOnForms();
         yield TextField::new('roles')->onlyOnIndex();
     }
-
-
 }
