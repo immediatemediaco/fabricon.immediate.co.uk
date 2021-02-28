@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Admin;
 use App\Entity\Conference;
 use App\Entity\Person;
+use App\Entity\Slot;
 use App\Entity\Speaker;
 use App\Entity\Talk;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -33,6 +34,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToRoute('Go to site', 'fa fa-arrow-alt-circle-right', 'app_home');
         yield MenuItem::section('Menu');
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToCrud('Schedule', 'fas fa-clock', Slot::class);
         yield MenuItem::linkToCrud('Conferences', 'fa fa-calendar-day', Conference::class);
         yield MenuItem::linkToCrud('Talks', 'fa fa-chalkboard-teacher', Talk::class);
         yield MenuItem::linkToCrud('People', 'fa fa-users', Person::class);
