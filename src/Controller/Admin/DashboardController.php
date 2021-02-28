@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,7 +25,11 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        return parent::index();
+        $scheduleUrl = $this->get(CrudUrlGenerator::class)->build()
+            ->setController(ScheduleCrudController::class)
+            ->generateUrl();
+
+        return $this->redirect($scheduleUrl);
     }
 
     public function configureDashboard(): Dashboard
@@ -48,7 +53,6 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToRoute('Go to site', 'fa fa-arrow-alt-circle-right', 'app_home');
         yield MenuItem::section('Menu');
-        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Schedule', 'fas fa-clock', Slot::class);
         yield MenuItem::linkToCrud('Conferences', 'fa fa-calendar-day', Conference::class);
         yield MenuItem::linkToCrud('Talks', 'fa fa-chalkboard-teacher', Talk::class);
