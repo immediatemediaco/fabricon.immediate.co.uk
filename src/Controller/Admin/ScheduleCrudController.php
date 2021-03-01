@@ -2,10 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Conference;
 use App\Entity\Settings;
 use App\Entity\Slot;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\SettingsRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -26,7 +25,11 @@ class ScheduleCrudController extends AbstractCrudController
         'Lunch break',
     ];
 
-    public function __construct(private EntityManagerInterface $em) {}
+    private string $indexPageTitle = '';
+
+    public function __construct(
+        private SettingsRepository $settings,
+    ) {}
 
     public static function getEntityFqcn(): string
     {
@@ -82,13 +85,14 @@ class ScheduleCrudController extends AbstractCrudController
 
     public function indexPageTitle(): string
     {
-        $qb = $this->em->createQueryBuilder()
-            ->select('c.name')
-            ->from(Conference::class, 'c')
-            ->innerJoin(Settings::class, 's', Join::WITH, 'c.id = s.currentConference');
+        if ($this->indexPageTitle) {
+            return $this->indexPageTitle;
+        }
 
-        $results = $qb->getQuery()->setMaxResults(1)->getOneOrNullResult();
+        $currentConference = ($this->settings->find(1))?->getCurrentConference();
 
-        return 'Schedule - ' . $results['name'];
+        $this->indexPageTitle = 'Schedule - ' . $currentConference?->getName();
+
+        return $this->indexPageTitle;
     }
 }
