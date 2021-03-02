@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Conference;
 use App\Entity\Slot;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -11,6 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Slot|null findOneBy(array $criteria, array $orderBy = null)
  * @method Slot[]    findAll()
  * @method Slot[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Slot[]    findByConference(Conference $conference, array $orderBy = null, $limit = null, $offset = null)
  */
 class SlotRepository extends ServiceEntityRepository
 {
@@ -18,33 +20,4 @@ class SlotRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Slot::class);
     }
-
-    // /**
-    //  * @return Slot[] Returns an array of Slot objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Slot
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
