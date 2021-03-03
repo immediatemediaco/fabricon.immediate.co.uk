@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GoogleController extends AbstractController
 {
-    #[Route('/login', name: 'app_login')]
+    #[Route('/login', name: 'app_login', priority: 1)]
     public function connect(ClientRegistry $clientRegistry): RedirectResponse
     {
         return $clientRegistry->getClient('google_main')->redirect(['openid', 'profile'], []);
@@ -22,7 +22,7 @@ class GoogleController extends AbstractController
         throw new LogicException('This statement should never be reached');
     }
 
-    #[Route('/logout', name:'app_logout')]
+    #[Route('/logout', name:'app_logout', priority: 1)]
     public function logout(): void
     {
         throw new LogicException('This statement should never be reached');
