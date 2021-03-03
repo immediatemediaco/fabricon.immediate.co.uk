@@ -1,0 +1,32 @@
+<div class="schedule">
+    <div class="schedule__track schedule__track-1">
+        {% include 'components/track.twig' with { track : "Track 1", description : settings.track1description } only %}
+    </div>
+    <div class="schedule__track schedule__track-2">
+        {% include 'components/track.twig' with { track : "Track 2", description : settings.track2description } only %}
+    </div>
+    {% for slot in schedule %}
+        <div class="schedule__timing">
+            <h5>{{ slot.startTime|date('H:i') }}</h5>
+        </div>
+        {% if slot.track1 %}
+            <div class="schedule__session schedule__session--track-{{ slot.track2 ? '1' : 'main' }}">
+                {% if slot.track2 %}
+                    <p class="schedule__track-label">Track 1</p>
+                {% endif %}
+                {% include 'components/talk.twig' with { talk : slot.track1 } only %}
+            </div>
+        {% endif %}
+        {% if slot.track2 %}
+            <div class="schedule__session schedule__session--track-2">
+                <p class="schedule__track-label">Track 2</p>
+                {% include 'components/talk.twig' with { talk : slot.track2 } only %}
+            </div>
+        {% endif %}
+        {% if slot.breakDetails %}
+            <div class="schedule__break">
+                {% include 'components/break.twig' with { break : slot.breakDetails } only %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

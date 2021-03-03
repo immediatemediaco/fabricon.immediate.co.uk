@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title conference.siteTitle %}
+
+{% block body %}
+
+    {% include 'components/navigation.twig' only %}
+    {% include 'components/masthead.twig' with { title : conference.siteTitle } %}
+
+    <div class="conference container">
+        <section class="conference__section conference__section--intro">
+            <h2>About Fabric Conference</h2>
+            <p class="conference__desc">{{ conference.about }}</p>
+        </section>
+        <section class="conference__section">
+            <h2>Schedule</h2>
+            {% include 'components/schedule.twig' with { schedule : schedule, settings : settings } only %}
+        </section>
+    </div>
+
+    {% include 'components/footer.twig' only %}
+
+{% endblock %}

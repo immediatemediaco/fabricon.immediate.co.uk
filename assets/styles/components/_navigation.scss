@@ -1,0 +1,12 @@
+.nav {
+    background-color: rgba($color-primary-alt-3, .95);
+    padding: 1rem 0;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+
+    &__logo {
+        display: inline-block;
+    }
+}

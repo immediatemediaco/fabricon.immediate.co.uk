@@ -1,0 +1,15 @@
+.footer {
+    background: $color-primary-alt-3;
+    padding: 2rem 0;
+    text-align: center;
+
+    &__logo {
+        margin-bottom: 1rem;
+    }
+
+    &__copy {
+        color: $color-white;
+        font-size: 0.8rem;
+        margin: 0;
+    }
+}

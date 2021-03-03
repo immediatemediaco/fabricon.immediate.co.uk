@@ -1,0 +1,31 @@
+.talk {
+    height: 100%;
+    background: rgba($color-primary-alt-1, .1);
+    border-left: 3px solid $color-primary-alt-1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+        color: $color-primary-alt-3;
+    }
+
+    &__description {
+        flex-grow: 1;
+    }
+
+    &__link {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        color: currentColor;
+
+        &[href]:hover {
+            color: $color-primary-alt-3;
+        }
+    }
+
+    &__icon {
+        margin-right: 5px;
+    }
+}

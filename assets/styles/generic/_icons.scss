@@ -1,0 +1,15 @@
+.icon {
+    display: inline-block;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 1rem;
+    width: 1rem;
+}
+
+.icon--slack {
+    background-image: url('~@fortawesome/fontawesome-free/svgs/brands/slack.svg');
+}
+
+.icon--teams {
+    background-image: url('~@fortawesome/fontawesome-free/svgs/brands/microsoft.svg');
+}

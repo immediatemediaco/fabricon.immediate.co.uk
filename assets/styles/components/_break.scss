@@ -1,0 +1,23 @@
+.break {
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+
+    &__text {
+        margin: 0;
+
+        &:before {
+            margin-right: 5px;
+        }
+    }
+
+    &--drinks .break__text:before {
+        content: '☕️';
+    }
+
+    &--lunch .break__text:before {
+        content: '🥪';
+    }
+}

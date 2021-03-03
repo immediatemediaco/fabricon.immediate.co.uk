@@ -1,0 +1,9 @@
+@mixin heading-font {
+  font-family: "FSMatthewsBold", sans-serif;
+  font-weight: 800 !important;
+}
+
+@mixin body-font {
+  font-family: "FSMatthews", sans-serif;
+  color: $color-dark-grey;
+}

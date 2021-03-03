@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Fabric Conference 2020' %}
+
+{% block body %}
+
+    {% include 'components/navigation.twig' only %}
+    {% include 'components/masthead.twig' with { title : conference.siteTitle } %}
+
+    <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="p-5">
+                        <h2 class="display-4">... COMING SOON ...</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    {% include 'components/footer.twig' only %}
+{% endblock %}
