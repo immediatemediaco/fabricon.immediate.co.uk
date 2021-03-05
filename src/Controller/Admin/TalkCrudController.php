@@ -41,34 +41,22 @@ class TalkCrudController extends AbstractCrudController
         yield TextField::new('title');
         yield TextareaField::new('description')->hideOnIndex();
         yield DateIntervalField::new('duration');
-        yield AssociationField::new('organiser')
-            ->setCustomOption(AssociationField::OPTION_QUERY_BUILDER_CALLABLE, [$this, 'organisers']);
-        yield AssociationField::new('speakers')
-            ->setCustomOption(AssociationField::OPTION_QUERY_BUILDER_CALLABLE, [$this, 'speakers']);
+        yield AssociationField::new('organiser')->setQueryBuilder(
+            fn (QueryBuilder $qb) => $this->role($qb, 'isOrganiser')
+        );
+        yield AssociationField::new('speakers')->setQueryBuilder(
+            fn (QueryBuilder $qb) => $this->role($qb, 'isSpeaker')
+        );
         yield FormField::addPanel('Q&A Details')
             ->setIcon('fa fa-question');
-        yield AssociationField::new('moderator')
-            ->setCustomOption(AssociationField::OPTION_QUERY_BUILDER_CALLABLE, [$this, 'moderators']);
-        yield DateIntervalField::new('qAndADuration', 'Q&A Duration');
-        yield TextField::new('slackChannel');
-        yield TextField::new('slackChannelUrl');
-        yield TextField::new('teamsUrl');
-        yield BooleanField::new('isArchived');
-    }
-
-    public function organisers(QueryBuilder $queryBuilder): QueryBuilder
-    {
-        return $this->role($queryBuilder, 'isOrganiser');
-    }
-
-    public function speakers(QueryBuilder $queryBuilder): QueryBuilder
-    {
-        return $this->role($queryBuilder, 'isSpeaker');
-    }
-
-    public function moderators(QueryBuilder $queryBuilder): QueryBuilder
-    {
-        return $this->role($queryBuilder, 'isModerator');
+        yield AssociationField::new('moderator')->setQueryBuilder(
+            fn (QueryBuilder $qb) => $this->role($qb, 'isModerator')
+        );
+        yield DateIntervalField::new('qAndADuration', 'Q&A Duration')->hideOnIndex();
+        yield TextField::new('slackChannel')->hideOnIndex();
+        yield TextField::new('slackChannelUrl')->hideOnIndex();
+        yield TextField::new('teamsUrl')->hideOnIndex();
+        yield BooleanField::new('isArchived', 'Archived?')->onlyOnIndex();
     }
 
     private function role(QueryBuilder $queryBuilder, string $role): QueryBuilder
