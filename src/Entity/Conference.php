@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ConferenceRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +42,11 @@ class Conference
      * @ORM\Column(type="boolean")
      */
     private bool $holdingPageEnabled = true;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private ?DateTimeInterface $date;
 
     public function getId(): ?int
     {
@@ -110,5 +116,17 @@ class Conference
     public function __toString(): string
     {
         return $this->getName();
+    }
+
+    public function getDate(): ?DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(?DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
     }
 }

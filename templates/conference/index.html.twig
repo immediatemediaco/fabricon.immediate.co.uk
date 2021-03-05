@@ -5,7 +5,10 @@
 {% block body %}
 
     {% include 'components/navigation.twig' only %}
-    {% include 'components/masthead.twig' with { title : conference.siteTitle } %}
+    {% include 'components/masthead.twig' with {
+        title : conference.siteTitle,
+        subtitle: conference.date|date('d F Y') ~ ' – Microsoft Teams'
+    } %}
 
     <div class="conference container">
         <section class="conference__section conference__section--intro">

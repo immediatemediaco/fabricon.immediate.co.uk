@@ -6,6 +6,7 @@ use App\Entity\Conference;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -28,6 +29,7 @@ class ConferenceCrudController extends AbstractCrudController
         yield TextField::new('name');
         yield SlugField::new('slug')->setTargetFieldName('name');
         yield TextField::new('siteTitle');
+        yield DateField::new('date');
         yield TextareaField::new('about');
         yield BooleanField::new('holdingPageEnabled');
     }
