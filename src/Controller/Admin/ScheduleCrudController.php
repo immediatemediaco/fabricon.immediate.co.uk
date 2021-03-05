@@ -61,7 +61,7 @@ class ScheduleCrudController extends AbstractCrudController
         yield FormField::addPanel('Conference Details')
             ->setIcon('fa fa-calendar-day');
         yield AssociationField::new('conference', 'Conference')
-            ->setCustomOption(AssociationField::OPTION_QUERY_BUILDER_CALLABLE, [$this, 'conference'])
+            ->setQueryBuilder(fn (QueryBuilder $qb) => $qb->addOrderBy('entity.id', 'DESC'))
             ->setRequired(true)
             ->hideOnIndex();
         yield FormField::addPanel('Slot Details')
@@ -75,12 +75,6 @@ class ScheduleCrudController extends AbstractCrudController
         yield FormField::addPanel('Break Details')
             ->setIcon('fa fa-mug-hot');
         yield ChoiceField::new('breakDetails')->setChoices(array_combine(self::$breaks, self::$breaks));
-    }
-
-    public function conference(QueryBuilder $queryBuilder): QueryBuilder
-    {
-        return $queryBuilder
-            ->addOrderBy('entity.id', 'DESC');
     }
 
     public function indexPageTitle(): string
