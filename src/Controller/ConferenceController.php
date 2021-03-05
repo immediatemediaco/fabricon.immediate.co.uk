@@ -25,7 +25,7 @@ class ConferenceController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        if ($conference->getHoldingPageEnabled()) {
+        if ($conference->getHoldingPageEnabled() && (! $this->isGranted('ROLE_ADMIN'))) {
             return $this->render('conference/holding.html.twig', compact('conference'));
         }
 
