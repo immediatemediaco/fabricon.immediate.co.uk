@@ -70,6 +70,11 @@ class Talk
      */
     private ?string $teamsUrl;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private ?bool $isArchived = false;
+
     public function __construct()
     {
         $this->speakers = new ArrayCollection();
@@ -215,5 +220,17 @@ class Talk
     public function __toString(): string
     {
         return $this->getTitle();
+    }
+
+    public function getIsArchived(): ?bool
+    {
+        return $this->isArchived;
+    }
+
+    public function setIsArchived(?bool $isArchived): self
+    {
+        $this->isArchived = $isArchived;
+
+        return $this;
     }
 }

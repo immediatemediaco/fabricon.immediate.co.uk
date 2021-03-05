@@ -6,11 +6,14 @@ use App\Admin\Field\DateIntervalField;
 use App\Entity\Talk;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 
 class TalkCrudController extends AbstractCrudController
 {
@@ -23,6 +26,12 @@ class TalkCrudController extends AbstractCrudController
     {
         return $crud
             ->setPageTitle(Crud::PAGE_INDEX, 'Talks');
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add(BooleanFilter::new('isArchived', 'Archived?'));
     }
 
     public function configureFields(string $pageName): iterable
@@ -44,6 +53,7 @@ class TalkCrudController extends AbstractCrudController
         yield TextField::new('slackChannel');
         yield TextField::new('slackChannelUrl');
         yield TextField::new('teamsUrl');
+        yield BooleanField::new('isArchived');
     }
 
     public function organisers(QueryBuilder $queryBuilder): QueryBuilder

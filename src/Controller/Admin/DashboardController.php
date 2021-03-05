@@ -55,7 +55,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Menu');
         yield MenuItem::linkToCrud('Schedule', 'fas fa-clock', Slot::class);
         yield MenuItem::linkToCrud('Conferences', 'fa fa-calendar-day', Conference::class);
-        yield MenuItem::linkToCrud('Talks', 'fa fa-chalkboard-teacher', Talk::class);
+        yield MenuItem::linkToCrud('Talks', 'fa fa-chalkboard-teacher', Talk::class)
+            ->setQueryParameter('filters[isArchived]', '0');
         yield MenuItem::linkToCrud('People', 'fa fa-users', Person::class);
         yield MenuItem::linkToCrud('Admins', 'fa fa-users-cog', Admin::class);
         yield MenuItem::linkToCrud('Settings', 'fa fa-gear', Settings::class)
