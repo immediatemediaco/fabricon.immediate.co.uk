@@ -20,9 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
-    /**
-     * @Route("/admin", name="app_admin")
-     */
+    #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
         $scheduleUrl = $this->get(CrudUrlGenerator::class)->build()
@@ -47,7 +45,6 @@ class DashboardController extends AbstractDashboardController
                 return $action->setIcon('far fa-trash-alt')->setLabel(false);
             });
     }
-
 
     public function configureMenuItems(): iterable
     {
