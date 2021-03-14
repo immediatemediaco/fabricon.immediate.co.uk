@@ -10,6 +10,8 @@ security:
         main:
             provider: in_memory
             form_login:
-                login_path: app_login
-                check_path: app_login
+                login_path: app_local_login
+                check_path: app_local_login
                 csrf_token_generator: security.csrf.token_manager
+            logout:
+                path: app_local_logout

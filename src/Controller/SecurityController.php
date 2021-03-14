@@ -10,7 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    #[Route('/login', name: 'app_login', priority: 1)]
+    #[Route('/local-login', name: 'app_local_login', priority: 1)]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
@@ -23,13 +23,10 @@ class SecurityController extends AbstractController
             'translation_domain' => 'admin',
             'page_title' => 'Sign in to Fabric Conference',
             'csrf_token_intention' => 'authenticate',
-            'username_label' => 'Username',
-            'username_parameter' => 'username',
-            'password_parameter' => 'password',
         ]);
     }
 
-    #[Route('/logout', name: 'app_logout', priority: 1)]
+    #[Route('/local-logout', name: 'app_local_logout', priority: 1)]
     public function logout(): void
     {
         throw new LogicException('This statement should never be reached');
