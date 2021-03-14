@@ -2,19 +2,19 @@ services:
     app:
         image: fabricon-app:local
         depends_on:
-            - db
+            - database
     web:
         image: fabricon-web:local
         ports:
             - 8000:80
         depends_on:
             - app
-    db:
+    database:
         image: postgres:13-alpine
         environment:
-            POSTGRES_PASSWORD: fabricon_password
-            POSTGRES_USER: fabricon_user
-            POSTGRES_DB: fabricon_db
+            POSTGRES_PASSWORD: main
+            POSTGRES_USER: main
+            POSTGRES_DB: main
         volumes:
             - db-data:/var/lib/postgresql/data
 volumes:
