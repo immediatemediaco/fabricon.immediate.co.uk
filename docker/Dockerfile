@@ -1,5 +1,9 @@
 FROM immediate/php:8.0-fpm
 
+RUN set -eux; \
+    apk --update add --no-cache postgresql-dev; \
+    docker-php-ext-install pdo_pgsql;
+
 ENV APP_ENV=prod COMPOSER_ALLOW_SUPERUSER=1
 
 COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
