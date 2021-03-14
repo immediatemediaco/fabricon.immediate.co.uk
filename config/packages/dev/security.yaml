@@ -1,0 +1,15 @@
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: 'plaintext'
+    providers:
+        in_memory:
+            memory:
+                users:
+                    admin: { password: 'password', roles: ['ROLE_ADMIN'] }
+    firewalls:
+        main:
+            provider: in_memory
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                csrf_token_generator: security.csrf.token_manager
