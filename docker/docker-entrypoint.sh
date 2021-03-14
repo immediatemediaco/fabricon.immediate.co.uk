@@ -11,6 +11,8 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
     ln -sf "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
     composer install --prefer-dist --no-progress --optimize-autoloader --no-interaction
     chmod -R 777 var
+    bin/console doctrine:migrations:migrate --no-interaction
+    bin/console doctrine:fixtures:load --append
   fi
 fi
 
