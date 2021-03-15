@@ -10,7 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    #[Route('/local-login', name: 'app_local_login', priority: 1)]
+    #[Route('/local-login', name: 'app_local_login', host: 'localhost', priority: 1)]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
@@ -26,7 +26,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('/local-logout', name: 'app_local_logout', priority: 1)]
+    #[Route('/local-logout', name: 'app_local_logout', host: 'localhost', priority: 1)]
     public function logout(): void
     {
         throw new LogicException('This statement should never be reached');
