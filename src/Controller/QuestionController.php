@@ -29,6 +29,7 @@ class QuestionController extends AbstractController
                 'required' => false,
                 'query_builder' => fn (TalkRepository $talks) => $talks->createQueryBuilder('q')
                     ->andWhere(sprintf('q.%s = false', 'isArchived'))
+                    ->orderBy('q.title', 'ASC')
             ])
             ->add('question')
             ->getForm();
