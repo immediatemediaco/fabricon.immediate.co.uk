@@ -3,8 +3,15 @@
 @import 'theme/variables';
 @import '~bootstrap/scss/bootstrap-reboot';
 @import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/close';
+@import '~bootstrap/scss/forms';
+@import '~bootstrap/scss/modal';
+@import '~bootstrap/scss/utilities/visibility';
+@import '~bootstrap/scss/utilities/';
 @import 'theme/one-page-wonder';
 
+@import 'forms/required';
 @import 'generic/typography';
 @import 'generic/icons';
 @import 'components/schedule';

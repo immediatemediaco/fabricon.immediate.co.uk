@@ -11,6 +11,7 @@
     } %}
 
     <div class="conference container">
+        {{ render(controller('App\\Controller\\QuestionController::new')) }}
         <section class="conference__section conference__section--intro">
             <h2>About Fabric Conference</h2>
             <p class="conference__desc">{{ conference.about }}</p>
