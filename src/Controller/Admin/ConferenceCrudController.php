@@ -31,6 +31,9 @@ class ConferenceCrudController extends AbstractCrudController
         yield TextField::new('siteTitle');
         yield DateField::new('date');
         yield TextareaField::new('about');
+        yield TextField::new('slackChannel')->hideOnIndex();
+        yield TextField::new('slackChannelUrl')->hideOnIndex();
+        yield TextField::new('feedbackFormUrl')->hideOnIndex();
         yield BooleanField::new('holdingPageEnabled');
     }
 }

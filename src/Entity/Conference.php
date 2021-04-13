@@ -48,6 +48,21 @@ class Conference
      */
     private ?DateTimeInterface $date;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $slackChannel;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $slackChannelUrl;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $feedbackFormUrl;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,11 +128,6 @@ class Conference
         return $this;
     }
 
-    public function __toString(): string
-    {
-        return $this->getName();
-    }
-
     public function getDate(): ?DateTimeInterface
     {
         return $this->date;
@@ -128,5 +138,46 @@ class Conference
         $this->date = $date;
 
         return $this;
+    }
+
+    public function getSlackChannel(): ?string
+    {
+        return $this->slackChannel;
+    }
+
+    public function setSlackChannel(?string $slackChannel): self
+    {
+        $this->slackChannel = $slackChannel;
+
+        return $this;
+    }
+
+    public function getSlackChannelUrl(): ?string
+    {
+        return $this->slackChannelUrl;
+    }
+
+    public function setSlackChannelUrl(?string $slackChannelUrl): self
+    {
+        $this->slackChannelUrl = $slackChannelUrl;
+
+        return $this;
+    }
+
+    public function getFeedbackFormUrl(): ?string
+    {
+        return $this->feedbackFormUrl;
+    }
+
+    public function setFeedbackFormUrl(?string $feedbackFormUrl): self
+    {
+        $this->feedbackFormUrl = $feedbackFormUrl;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 }
