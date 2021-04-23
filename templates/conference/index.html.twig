@@ -11,10 +11,14 @@
     } %}
 
     <div class="conference container">
-        {{ render(controller('App\\Controller\\QuestionController::new')) }}
         <section class="conference__section conference__section--intro">
             <h2>About Fabric Conference</h2>
             <p class="conference__desc">{{ conference.about }}</p>
+            <div class="conference__details">
+                <p>Each presentation has its own Teams Live session, so follow the “Join on Microsoft Teams” link to join at the right time. If you’re unable to attend on the day or you can’t choose between two talks you can come back and watch at any time as all talks will be recorded.</p>
+                <p>If you’ve got any questions you’d like to send through to a speaker ahead of the conference, please use the “Submit a question” form. You’ll also get a chance to ask questions during each session using the Q&A feature.</p>
+                {{ render(controller('App\\Controller\\QuestionController::new')) }}
+            </div>
         </section>
         <section class="conference__section">
             <h2>Schedule</h2>
