@@ -41,6 +41,7 @@ class SettingsCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield AssociationField::new('currentConference');
+        yield TextareaField::new('conferenceDetails');
         yield TextareaField::new('track1Description', 'Track 1 Description');
         yield TextareaField::new('track2Description', 'Track 2 Description');
     }

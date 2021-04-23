@@ -32,6 +32,11 @@ class Settings
      */
     private ?string $track2Description;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private ?string $conferenceDetails;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Settings
     public function setTrack2Description(?string $track2Description): self
     {
         $this->track2Description = $track2Description;
+
+        return $this;
+    }
+
+    public function getConferenceDetails(): ?string
+    {
+        return $this->conferenceDetails;
+    }
+
+    public function setConferenceDetails(?string $conferenceDetails): self
+    {
+        $this->conferenceDetails = $conferenceDetails;
 
         return $this;
     }
