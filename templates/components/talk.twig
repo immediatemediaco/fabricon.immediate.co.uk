@@ -8,13 +8,13 @@
         <p>Moderated by {{ talk.moderator }}</p>
     </div>
     {% if talk.slackChannelUrl and talk.slackChannel %}
-        <a href="{{ talk.slackChannelUrl }}" class="talk__link"><i
+        <a href="{{ talk.slackChannelUrl }}" class="talk__link" target="_blank"><i
                     class="talk__icon icon icon--slack"></i>{{ talk.slackChannel }}</a>
     {% elseif talk.slackChannel %}
         <p class="talk__link"><i class="talk__icon icon icon--slack"></i>{{ talk.slackChannel }}</p>
     {% endif %}
     {% if talk.teamsUrl %}
-        <a href="{{ talk.teamsUrl }}" class="talk__link"><i class="talk__icon icon icon--teams"></i>Join on Microsoft
+        <a href="{{ talk.teamsUrl }}" class="talk__link" target="_blank"><i class="talk__icon icon icon--teams"></i>Join on Microsoft
             Teams</a>
     {% endif %}
 </div>
