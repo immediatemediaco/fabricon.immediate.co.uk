@@ -4,6 +4,7 @@
     border: 2px solid transparent;
     border-radius: 5px;
     color: $white;
+    display: inline-block;
     padding: 5px 10px;
     transition: background .2s linear, border .2s linear;
     
@@ -23,5 +24,7 @@
     &:hover {
         background: $color-primary-alt-3;
         border: 2px solid $color-secondary;
+        color: $white;
+        text-decoration: none;
     }
 }

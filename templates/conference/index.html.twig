@@ -16,7 +16,15 @@
             <p class="conference__desc">{{ conference.about }}</p>
             <div class="conference__details">
                 {{ settings.conferenceDetails|raw }}
-                {{ render(controller('App\\Controller\\QuestionController::new')) }}
+                {% if conference.slackChannel and conference.slackChannelUrl %}
+                <p>Join the discussion using <a href="{{ conference.slackChannelUrl }}" target="_blank">{{ conference.slackChannel }}</a> on Slack.</p>
+                {% endif %}
+                    <div class="conference__ctas">
+                        {{ render(controller('App\\Controller\\QuestionController::new')) }}
+                        {% if conference.feedbackFormUrl %}
+                        <a href="{{ conference.feedbackFormUrl }}" target="_blank" class="button">Submit feedback</a>
+                        {% endif %}
+                    </div>
             </div>
         </section>
         <section class="conference__section">

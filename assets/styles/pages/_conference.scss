@@ -10,4 +10,9 @@
     &__desc {
         font-size: 1.4rem;
     }
+
+    &__ctas {
+        display: flex;
+        gap: 20px;
+    }
 }
