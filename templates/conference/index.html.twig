@@ -16,6 +16,7 @@
             <p class="conference__desc">{{ conference.about }}</p>
             <div class="conference__details">
                 {{ settings.conferenceDetails|raw }}
+                {% if settings.currentConference is same as(conference) %}
                 {% if conference.slackChannel and conference.slackChannelUrl %}
                 <p>Join the discussion using <a href="{{ conference.slackChannelUrl }}" target="_blank">{{ conference.slackChannel }}</a> on Slack.</p>
                 {% endif %}
@@ -25,6 +26,7 @@
                         <a href="{{ conference.feedbackFormUrl }}" target="_blank" class="button">Submit feedback</a>
                         {% endif %}
                     </div>
+                {% endif %}
             </div>
         </section>
         <section class="conference__section">
