@@ -18,10 +18,10 @@ class AppFixtures extends Fixture
         }
 
         $conference = new Conference();
-        $conference->setName('May 2021');
-        $conference->setSlug('may-2021');
-        $conference->setSiteTitle('FabriCon May 2021');
-        $conference->setDate(DateTime::createFromFormat('j-M-Y', '11-May-2021'));
+        $conference->setName('November 2021');
+        $conference->setSlug('november-2021');
+        $conference->setSiteTitle('FabriCon November 2021');
+        $conference->setDate(DateTime::createFromFormat('j-M-Y', '16-November-2021'));
 
         $manager->persist($conference);
 
