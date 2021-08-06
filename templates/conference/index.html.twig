@@ -12,7 +12,7 @@
 
     <div class="conference container">
         <section class="conference__section conference__section--intro">
-            <h2>About Fabric Conference</h2>
+            <h4>About Fabric Conference</h4>
             <p class="conference__desc">{{ conference.about }}</p>
             <div class="conference__details">
                 {{ settings.conferenceDetails|raw }}
@@ -30,7 +30,7 @@
             </div>
         </section>
         <section class="conference__section">
-            <h2>Schedule</h2>
+            <h4>Schedule</h4>
             {% include 'components/schedule.twig' with { schedule : schedule, settings : settings } only %}
         </section>
     </div>

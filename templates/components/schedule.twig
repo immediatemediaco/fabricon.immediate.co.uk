@@ -7,7 +7,7 @@
     </div>
     {% for slot in schedule %}
         <div class="schedule__timing">
-            <h5>{{ slot.startTime|date('H:i') }}</h5>
+            <h6>{{ slot.startTime|date('H:i') }}</h6>
         </div>
         {% if slot.track1 %}
             <div class="schedule__session schedule__session--track-{{ slot.track2 ? '1' : 'main' }}">
