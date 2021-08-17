@@ -17,6 +17,9 @@
                     <div class="p-5">
                         {% if settings.introduction %}
                             <h2 class="display-4">Introduction</h2>
+                            <div class="conference__ctas">
+                                {{ render(controller('App\\Controller\\SuggestionController::new')) }}
+                            </div>
                             <p>{{ settings.introduction|raw }}</p>
                             <div class="conference__ctas">
                                 {{ render(controller('App\\Controller\\SuggestionController::new')) }}
