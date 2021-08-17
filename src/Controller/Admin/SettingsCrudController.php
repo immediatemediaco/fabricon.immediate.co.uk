@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 
 class SettingsCrudController extends AbstractCrudController
 {
@@ -44,5 +45,6 @@ class SettingsCrudController extends AbstractCrudController
         yield TextareaField::new('conferenceDetails');
         yield TextareaField::new('track1Description', 'Track 1 Description');
         yield TextareaField::new('track2Description', 'Track 2 Description');
+        yield TextEditorField::new('introduction');
     }
 }

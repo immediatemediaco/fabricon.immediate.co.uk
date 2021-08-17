@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Conference;
+use App\Repository\ConferenceRepository;
 use App\Repository\SettingsRepository;
 use App\Repository\SlotRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,20 +14,27 @@ use Twig\Environment;
 class ConferenceController extends AbstractController
 {
     public function __construct(
+        private ConferenceRepository $conferences,
         private SettingsRepository $settings,
         private SlotRepository $slots,
         private Environment $twig,
     ) {}
 
     #[Route('/{slug}', name: 'app_conference')]
-    public function index(Conference $conference): Response
+    public function show(Conference $conference): Response
     {
         if (! $settings = $this->settings->find(1)) {
             throw $this->createNotFoundException();
         }
 
+        $nextConference = $this->conferences->findNext($conference->getDate());
+        $previousConference = $this->conferences->findPrevious($conference->getDate());
+
         if ($conference->getHoldingPageEnabled() && (! $this->isGranted('ROLE_ADMIN'))) {
-            return $this->render('conference/holding.html.twig', compact('conference'));
+            return $this->render(
+                'conference/holding.html.twig',
+                compact('conference', 'nextConference', 'previousConference', 'settings')
+            );
         }
 
         $schedule = $this->slots->findByConference($conference, ['startTime' => 'ASC']);
@@ -39,6 +47,9 @@ class ConferenceController extends AbstractController
             return $this->render($conferenceTemplate, compact('conference', 'schedule', 'settings'));
         }
 
-        return $this->render('conference/index.html.twig', compact('conference', 'schedule', 'settings'));
+        return $this->render(
+            'conference/show.html.twig',
+            compact('conference', 'schedule', 'settings', 'nextConference', 'previousConference')
+        );
     }
 }

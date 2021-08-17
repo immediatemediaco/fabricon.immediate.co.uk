@@ -37,6 +37,11 @@ class Settings
      */
     private ?string $conferenceDetails;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $introduction;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Settings
     public function setConferenceDetails(?string $conferenceDetails): self
     {
         $this->conferenceDetails = $conferenceDetails;
+
+        return $this;
+    }
+
+    public function getIntroduction(): ?string
+    {
+        return $this->introduction;
+    }
+
+    public function setIntroduction(?string $introduction): self
+    {
+        $this->introduction = $introduction;
 
         return $this;
     }

@@ -8,7 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class ConferenceCrudController extends AbstractCrudController
@@ -21,7 +21,8 @@ class ConferenceCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle(Crud::PAGE_INDEX, 'Conferences');
+            ->setPageTitle(Crud::PAGE_INDEX, 'Conferences')
+            ->setDefaultSort(['date' => 'DESC']);
     }
 
     public function configureFields(string $pageName): iterable
@@ -30,7 +31,7 @@ class ConferenceCrudController extends AbstractCrudController
         yield SlugField::new('slug')->setTargetFieldName('name');
         yield TextField::new('siteTitle');
         yield DateField::new('date');
-        yield TextareaField::new('about');
+        yield TextEditorField::new('about');
         yield TextField::new('slackChannel')->hideOnIndex();
         yield TextField::new('slackChannelUrl')->hideOnIndex();
         yield TextField::new('feedbackFormUrl')->hideOnIndex();

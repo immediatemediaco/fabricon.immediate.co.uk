@@ -8,6 +8,7 @@ use App\Entity\Person;
 use App\Entity\Question;
 use App\Entity\Settings;
 use App\Entity\Slot;
+use App\Entity\Suggestion;
 use App\Entity\Talk;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -57,6 +58,7 @@ class DashboardController extends AbstractDashboardController
             ->setQueryParameter('filters[isArchived]', '0');
         yield MenuItem::linkToCrud('People', 'fa fa-users', Person::class);
         yield MenuItem::linkToCrud('Questions', 'fas fa-question-circle', Question::class);
+        yield MenuItem::linkToCrud('Suggestions', 'fas fa-exclamation-circle', Suggestion::class);
         yield MenuItem::linkToCrud('Admins', 'fa fa-users-cog', Admin::class);
         yield MenuItem::linkToCrud('Settings', 'fa fa-gear', Settings::class)
         ->setAction(Action::DETAIL)

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Conference;
+use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,26 @@ class ConferenceRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Conference::class);
+    }
+
+    public function findNext(DateTimeInterface $date): ?Conference
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.date > :date')
+            ->setParameter('date', $date)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findPrevious(DateTimeInterface $date): ?Conference
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.date < :date')
+            ->setParameter('date', $date)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     // /**

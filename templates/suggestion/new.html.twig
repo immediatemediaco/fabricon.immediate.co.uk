@@ -1,0 +1,34 @@
+<button type="button" class="button" data-bs-toggle="modal" data-bs-target="#suggestionModal">
+    Suggest a topic
+</button>
+
+<div class="modal fade" id="suggestionModal" tabindex="-1" aria-labelledby="suggestionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="suggestionModalLabel">Suggest a topic</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ form_start(suggestion_form) }}
+                <div class="form-group mb-3">
+                    {{ form_label(suggestion_form.name, 'Your name(s)') }}
+                    {{ form_widget(suggestion_form.name) }}
+                </div>
+                <div class="form-group mb-3">
+                    {{ form_widget(suggestion_form.type) }}
+                </div>
+                <div class="form-group mb-3">
+                    {{ form_label(suggestion_form.topic) }}
+                    {{ form_widget(suggestion_form.topic) }}
+                </div>
+                <input type="submit" id="submitForm" class="invisible">
+                {{ form_end(suggestion_form) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <label for="submitForm" class="btn btn-primary" tabindex="0">Submit</label>
+            </div>
+        </div>
+    </div>
+</div>
