@@ -15,11 +15,15 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <div class="p-5">
-                        <h2 class="display-4">Introduction</h2>
-                        <p>{{ settings.introduction|raw }}</p>
-                        <div class="conference__ctas">
-                            {{ render(controller('App\\Controller\\SuggestionController::new')) }}
-                        </div>
+                        {% if settings.introduction %}
+                            <h2 class="display-4">Introduction</h2>
+                            <p>{{ settings.introduction|raw }}</p>
+                            <div class="conference__ctas">
+                                {{ render(controller('App\\Controller\\SuggestionController::new')) }}
+                            </div>
+                        {% else %}
+                            <h2 class="display-4">... COMING SOON ...</h2>
+                        {% endif %}
                     </div>
                 </div>
             </div>
