@@ -13,7 +13,7 @@
     <div class="conference container">
         <section class="conference__section conference__section--intro">
             <h4>About Fabric Conference</h4>
-            <p class="conference__desc">{{ conference.about|raw }}</p>
+            <p class="conference__desc">{{ conference.about|striptags }}</p>
             <div class="conference__details">
                 {{ settings.conferenceDetails|raw }}
                 {% if settings.currentConference is same as(conference) %}
