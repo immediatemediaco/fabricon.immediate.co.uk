@@ -1,4 +1,4 @@
-FROM immediate/php:8.0-fpm
+FROM ghcr.io/immediate-media/php:8.0-fpm
 
 RUN set -eux; \
     apk --update add --no-cache postgresql-dev; \
