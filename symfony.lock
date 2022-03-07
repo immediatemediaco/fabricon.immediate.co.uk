@@ -120,12 +120,12 @@
         "version": "1.7.0"
     },
     "knpuniversity/oauth2-client-bundle": {
-        "version": "1.20",
+        "version": "2.10",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "master",
             "version": "1.20",
-            "ref": "cf8a43877d119412c8528ba07da6b5255670f312"
+            "ref": "1ff300d8c030f55c99219cc55050b97a695af3f6"
         },
         "files": [
             "config/packages/knpu_oauth2_client.yaml"
