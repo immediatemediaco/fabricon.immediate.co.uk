@@ -20,4 +20,8 @@
     &--lunch .break__text:before {
         content: '🥪';
     }
+
+    &--pizza-and-drinks .break__text:before {
+        content: '🍕';
+    }
 }
