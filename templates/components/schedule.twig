@@ -25,7 +25,10 @@
         {% endif %}
         {% if slot.breakDetails %}
             <div class="schedule__break">
-                {% include 'components/break.twig' with { break : slot.breakDetails } only %}
+                {%
+                    include 'components/break.twig'
+                    with { break : slot.breakDetails, breakStyle : slot.breakStyle } only
+                %}
             </div>
         {% endif %}
     {% endfor %}

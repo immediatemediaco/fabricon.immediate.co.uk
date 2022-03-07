@@ -114,6 +114,11 @@ class Slot
         return $this;
     }
 
+    public function getBreakStyle(): ?string
+    {
+        return strtolower(str_replace(' ', '-', rtrim($this->breakDetails, ' break')));
+    }
+
     public function getConference(): ?Conference
     {
         return $this->conference;
