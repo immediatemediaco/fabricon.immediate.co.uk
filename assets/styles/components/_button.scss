@@ -7,19 +7,6 @@
     display: inline-block;
     padding: 5px 10px;
     transition: background .2s linear, border .2s linear;
-    
-    &:after {
-        background: repeating-linear-gradient(203deg,transparent,transparent 2px,#01749c 0,#01749c 8px);
-        content: '';
-        display: block;
-        position: absolute;
-        top: 5px;
-        right: -5px;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        border-radius: 5px;
-    }
 
     &:hover {
         background: $color-primary-alt-3;
