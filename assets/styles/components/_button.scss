@@ -7,6 +7,7 @@
     display: inline-block;
     padding: 5px 10px;
     transition: background .2s linear, border .2s linear;
+    text-decoration: none;
 
     &:hover {
         background: $color-primary-alt-3;
