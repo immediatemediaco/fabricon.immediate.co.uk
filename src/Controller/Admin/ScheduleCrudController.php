@@ -23,7 +23,7 @@ class ScheduleCrudController extends AbstractCrudController
     private static array $breaks = [
         'Drinks break',
         'Lunch break',
-        'Pizza and drinks break',
+        'Pizza and drinks',
     ];
 
     private string $indexPageTitle = '';
