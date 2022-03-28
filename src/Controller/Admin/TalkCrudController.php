@@ -56,6 +56,8 @@ class TalkCrudController extends AbstractCrudController
         yield TextField::new('slackChannel')->hideOnIndex();
         yield TextField::new('slackChannelUrl')->hideOnIndex();
         yield TextField::new('teamsUrl')->hideOnIndex();
+        yield TextField::new('slidoText')->hideOnIndex();
+        yield TextField::new('slidoUrl')->hideOnIndex();
         yield BooleanField::new('isArchived', 'Archived?')->onlyOnIndex();
     }
 

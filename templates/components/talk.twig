@@ -19,4 +19,8 @@
         <a href="{{ talk.teamsUrl }}" class="talk__link" target="_blank"><i class="talk__icon icon icon--teams"></i>Join on Microsoft
             Teams</a>
     {% endif %}
+    {% if talk.slidoUrl %}
+        <a href="{{ talk.slidoUrl }}" class="talk__link" target="_blank"><i
+                    class="talk__icon icon icon--slido"></i>{{ talk.slidoText ?: talk.slidoUrl }}</a>
+    {% endif %}
 </div>
