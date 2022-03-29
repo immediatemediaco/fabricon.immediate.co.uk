@@ -18,7 +18,7 @@
                 {{ settings.conferenceDetails|raw }}
                 {% if settings.currentConference is same as(conference) %}
                 {% if conference.slackChannel and conference.slackChannelUrl %}
-                <p>Join the discussion using <a href="{{ conference.slackChannelUrl }}" target="_blank">{{ conference.slackChannel }}</a> on Slack.</p>
+                <p>Follow updates throughout the day using <a href="{{ conference.slackChannelUrl }}" target="_blank">{{ conference.slackChannel }}</a> on Slack.</p>
                 {% endif %}
                     <div class="conference__ctas">
                         {{ render(controller('App\\Controller\\QuestionController::new')) }}
