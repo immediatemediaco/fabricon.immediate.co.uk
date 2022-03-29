@@ -71,6 +71,16 @@ class Talk
     private ?string $teamsUrl;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $slidoText;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $slidoUrl;
+
+    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private ?bool $isArchived = false;
@@ -213,6 +223,30 @@ class Talk
     public function setTeamsUrl(?string $teamsUrl): self
     {
         $this->teamsUrl = $teamsUrl;
+
+        return $this;
+    }
+
+    public function getSlidoText(): ?string
+    {
+        return $this->slidoText;
+    }
+
+    public function setSlidoText(?string $slidoText): self
+    {
+        $this->slidoText = $slidoText;
+
+        return $this;
+    }
+
+    public function getSlidoUrl(): ?string
+    {
+        return $this->slidoUrl;
+    }
+
+    public function setSlidoUrl(?string $slidoUrl): self
+    {
+        $this->slidoUrl = $slidoUrl;
 
         return $this;
     }
