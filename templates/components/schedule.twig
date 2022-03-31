@@ -14,13 +14,13 @@
 
                     <p class="schedule__track-label schedule__track-label--track-1">Cyan</p>
 
-                {% include 'components/talk.twig' with { talk : slot.track1, track : 'track-1' } only %}
+                {% include 'components/talk.twig' with { talk : slot.track1, track : 1 } only %}
             </div>
         {% endif %}
         {% if slot.track2 %}
             <div class="schedule__session schedule__session--track-2">
                 <p class="schedule__track-label schedule__track-label--track-2">Magenta</p>
-                {% include 'components/talk.twig' with { talk : slot.track2, track : 'track-2' } only %}
+                {% include 'components/talk.twig' with { talk : slot.track2, track : 2 } only %}
             </div>
         {% endif %}
         {% if slot.breakDetails %}
