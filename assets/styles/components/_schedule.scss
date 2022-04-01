@@ -10,6 +10,8 @@
 
     &__session,
     &__break {
+        display: flex;
+        flex-direction: column;
         grid-column-start: 2;
     }
 
