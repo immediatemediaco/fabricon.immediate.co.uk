@@ -11,7 +11,6 @@
         </div>
 
         {% if slot.track1 %}
-            {# <div class="schedule__session schedule__session--track-{{ slot.track2 ? '1' : 'main' }}"> #}
             <div class="schedule__session schedule__session--track-1">
                 <p class="schedule__track-label schedule__track-label--track-1">Cyan: VH Floor 5 Boardroom</p>
                 {% include 'components/talk.twig' with { talk : slot.track1, track : 1 } only %}
