@@ -57,12 +57,12 @@
             grid-column-start: auto;
         }
 
-        &__break {
-            grid-column-end: span 2;
+        &__session--track-2 {
+            grid-column-start: 3;
         }
 
-        &__track-label {
-            display: none;
+        &__break {
+            grid-column-end: span 2;
         }
     }
 }
