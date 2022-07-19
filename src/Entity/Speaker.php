@@ -5,29 +5,23 @@ namespace App\Entity;
 use App\Repository\SpeakerRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=SpeakerRepository::class)
- */
+#[ORM\Entity(repositoryClass: SpeakerRepository::class)]
 class Speaker
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private ?int $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private ?string $name;
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $name = '';
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
