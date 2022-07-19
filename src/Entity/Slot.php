@@ -6,48 +6,32 @@ use App\Repository\SlotRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=SlotRepository::class)
- */
+#[ORM\Entity(repositoryClass: SlotRepository::class)]
 class Slot
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="time", nullable=true)
-     */
-    private ?DateTimeInterface $startTime;
+    #[ORM\Column(type: 'time', nullable: true)]
+    private ?DateTimeInterface $startTime = null;
 
-    /**
-     * @ORM\Column(type="time", nullable=true)
-     */
-    private ?DateTimeInterface $endTime;
+    #[ORM\Column(type: 'time', nullable: true)]
+    private ?DateTimeInterface $endTime = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Talk::class)
-     */
-    private ?Talk $track1;
+    #[ORM\ManyToOne(targetEntity: Talk::class)]
+    private ?Talk $track1 = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Talk::class)
-     */
-    private ?Talk $track2;
+    #[ORM\ManyToOne(targetEntity: Talk::class)]
+    private ?Talk $track2 = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $breakDetails;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $breakDetails = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Conference::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private ?Conference $conference;
+    #[ORM\ManyToOne(targetEntity: Conference::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Conference $conference = null;
 
     public function getId(): ?int
     {

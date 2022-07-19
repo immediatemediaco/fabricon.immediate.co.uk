@@ -7,37 +7,25 @@ use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=SuggestionRepository::class)
- */
+#[ORM\Entity(repositoryClass: SuggestionRepository::class)]
 class Suggestion
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $name;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $type;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $type = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private ?string $topic;
+    #[ORM\Column(type: 'text')]
+    private ?string $topic = null;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $date;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?DateTimeInterface $date = null;
 
     public function getId(): ?int
     {

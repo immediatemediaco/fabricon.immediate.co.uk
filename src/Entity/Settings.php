@@ -5,42 +5,28 @@ namespace App\Entity;
 use App\Repository\SettingsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=SettingsRepository::class)
- */
+#[ORM\Entity(repositoryClass: SettingsRepository::class)]
 class Settings
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Conference::class, cascade={"persist", "remove"})
-     */
-    private ?Conference $currentConference;
+    #[ORM\OneToOne(targetEntity: Conference::class, cascade: ['persist', 'remove'])]
+    private ?Conference $currentConference = null;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private ?string $track1Description;
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $track1Description = null;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private ?string $track2Description;
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $track2Description = null;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private ?string $conferenceDetails;
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $conferenceDetails = null;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $introduction;
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $introduction = null;
 
     public function getId(): ?int
     {

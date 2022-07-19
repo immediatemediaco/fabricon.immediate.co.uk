@@ -5,32 +5,22 @@ namespace App\Entity;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=QuestionRepository::class)
- */
+#[ORM\Entity(repositoryClass: QuestionRepository::class)]
 class Question
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $name = '';
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Talk::class)
-     */
-    private ?Talk $talk;
+    #[ORM\ManyToOne(targetEntity: Talk::class)]
+    private ?Talk $talk = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private ?string $question;
+    #[ORM\Column(type: 'text')]
+    private ?string $question = null;
 
     public function getId(): ?int
     {

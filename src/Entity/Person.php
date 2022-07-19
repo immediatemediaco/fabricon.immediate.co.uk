@@ -5,44 +5,32 @@ namespace App\Entity;
 use App\Repository\PersonRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=PersonRepository::class)
- */
+#[ORM\Entity(repositoryClass: PersonRepository::class)]
 class Person
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private ?string $name;
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $name = '';
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private ?bool $isModerator;
+    #[ORM\Column(type: 'boolean')]
+    private bool $isModerator = false;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private ?bool $isOrganiser;
+    #[ORM\Column(type: 'boolean')]
+    private bool $isOrganiser = false;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private ?bool $isSpeaker;
+    #[ORM\Column(type: 'boolean')]
+    private bool $isSpeaker = false;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -71,7 +59,7 @@ class Person
         return implode(', ', $roles);
     }
 
-    public function isModerator(): ?bool
+    public function isModerator(): bool
     {
         return $this->isModerator;
     }
@@ -83,7 +71,7 @@ class Person
         return $this;
     }
 
-    public function isOrganiser(): ?bool
+    public function isOrganiser(): bool
     {
         return $this->isOrganiser;
     }
@@ -95,7 +83,7 @@ class Person
         return $this;
     }
 
-    public function isSpeaker(): ?bool
+    public function isSpeaker(): bool
     {
         return $this->isSpeaker;
     }

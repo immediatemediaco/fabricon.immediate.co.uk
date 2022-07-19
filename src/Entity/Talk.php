@@ -8,81 +8,51 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=TalkRepository::class)
- */
+#[ORM\Entity(repositoryClass: TalkRepository::class)]
 class Talk
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private ?string $title;
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $title = '';
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private ?string $description;
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $description = null;
 
-    /**
-     * @ORM\Column(type="dateinterval")
-     */
-    private ?DateInterval $duration;
+    #[ORM\Column(type: 'dateinterval')]
+    private ?DateInterval $duration = null;
 
-    /**
-     * @ORM\Column(type="dateinterval", nullable=true)
-     */
-    private ?DateInterval $qAndADuration;
+    #[ORM\Column(type: 'dateinterval', nullable: true)]
+    private ?DateInterval $qAndADuration = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Person::class)
-     */
-    private ?Person $organiser;
+    #[ORM\ManyToOne(targetEntity: Person::class)]
+    private ?Person $organiser = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Person::class)
-     */
-    private ?Person $moderator;
+    #[ORM\ManyToOne(targetEntity: Person::class)]
+    private ?Person $moderator = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Person::class)
-     */
+    #[ORM\ManyToMany(targetEntity: Person::class)]
     private Collection $speakers;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $slackChannel;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $slackChannel = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $slackChannelUrl;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $slackChannelUrl = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $teamsUrl;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $teamsUrl = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $slidoText;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $slidoText = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $slidoUrl;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $slidoUrl = null;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
+    #[ORM\Column(type: 'boolean', nullable: true)]
     private ?bool $isArchived = false;
 
     public function __construct()
@@ -95,7 +65,7 @@ class Talk
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }

@@ -6,69 +6,47 @@ use App\Repository\ConferenceRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=ConferenceRepository::class)
- */
+#[ORM\Entity(repositoryClass: ConferenceRepository::class)]
 class Conference
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private ?string $name;
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $name = '';
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private ?string $slug;
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $slug = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $siteTitle;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $siteTitle = null;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private ?string $about;
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $about = null;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private bool $holdingPageEnabled = true;
 
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private ?DateTimeInterface $date;
+    #[ORM\Column(type: 'date', nullable: true)]
+    private ?DateTimeInterface $date = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $slackChannel;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $slackChannel = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $slackChannelUrl;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $slackChannelUrl = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $feedbackFormUrl;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $feedbackFormUrl = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
