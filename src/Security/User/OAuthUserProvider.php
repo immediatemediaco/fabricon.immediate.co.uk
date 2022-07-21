@@ -14,27 +14,33 @@ class OAuthUserProvider implements UserProviderInterface
     ];
 
     public function __construct(
-        private AdminRepository $admins
-    ) {}
+        private AdminRepository $admins,
+    ) {
+    }
 
-    public function loadUserByUsername($username): UserInterface
+    public function loadUserByIdentifier($identifier): UserInterface
     {
-        $oAuthUser = new OAuthUser($username);
+        $oAuthUser = new OAuthUser($identifier);
 
-        if ($this->isAdmin($username)) {
+        if ($this->isAdmin($identifier)) {
             $oAuthUser->addRole('ROLE_ADMIN');
         }
 
         return $oAuthUser;
     }
 
+    public function loadUserByUsername($username): UserInterface
+    {
+        return $this->loadUserByIdentifier($username);
+    }
+
     public function refreshUser(UserInterface $user): UserInterface
     {
         if (! $user instanceof OAuthUser) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
         }
 
-        return $this->loadUserByUsername($user->getUsername());
+        return $this->loadUserByIdentifier($user->getUserIdentifier());
     }
 
     public function supportsClass($class): bool

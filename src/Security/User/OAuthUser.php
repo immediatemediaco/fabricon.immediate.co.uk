@@ -7,9 +7,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class OAuthUser implements UserInterface
 {
     public function __construct(
-        private string $username,
-        private array $roles = ['ROLE_USER', 'ROLE_OAUTH_USER']
-    ) {}
+        private string $identifier,
+        private array $roles = ['ROLE_USER', 'ROLE_OAUTH_USER'],
+    ) {
+    }
 
     public function getRoles(): ?array
     {
@@ -31,10 +32,17 @@ class OAuthUser implements UserInterface
         return null;
     }
 
-    public function getUsername(): string
+    public function getUserIdentifier(): string
     {
-        return $this->username;
+        return $this->identifier;
     }
 
-    public function eraseCredentials(): void {}
+    public function getUsername(): string
+    {
+        return $this->getUserIdentifier();
+    }
+
+    public function eraseCredentials(): void
+    {
+    }
 }
