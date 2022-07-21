@@ -1,0 +1,11 @@
+security:
+    providers:
+        oauth_users:
+            id: App\Security\User\OAuthUserProvider
+    firewalls:
+        main:
+            provider: oauth_users
+            custom_authenticators:
+                - App\Security\GoogleAuthenticator
+            logout:
+                path: app_logout
