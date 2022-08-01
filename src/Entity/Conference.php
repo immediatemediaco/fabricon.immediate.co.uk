@@ -23,7 +23,7 @@ class Conference
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $siteTitle = null;
 
-    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private ?string $about = null;
 
     #[ORM\Column(type: 'boolean')]
