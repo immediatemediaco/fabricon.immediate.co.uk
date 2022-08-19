@@ -9,3 +9,7 @@
 import './styles/app.scss';
 
 import 'bootstrap/js/dist/modal'
+import 'bootstrap/js/dist/tab'
+
+// start the Stimulus application
+import './bootstrap';

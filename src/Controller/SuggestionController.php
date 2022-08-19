@@ -2,13 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Question;
 use App\Entity\Suggestion;
-use App\Entity\Talk;
-use App\Repository\TalkRepository;
+use App\Repository\SuggestionRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -20,7 +17,9 @@ class SuggestionController extends AbstractController
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-    ) {}
+        private SuggestionRepository $suggestions,
+    ) {
+    }
 
     #[Route('/suggestion/new', name: 'app_suggestion_new')]
     public function new(Request $request): Response
@@ -58,6 +57,11 @@ class SuggestionController extends AbstractController
             return $this->redirect($request->headers->get('referer'));
         }
 
-        return $this->render('suggestion/new.html.twig', ['suggestion_form' => $form->createView()]);
+        $pollSuggestions = $this->suggestions->findBy(['isPoll' => true]);
+
+        return $this->render('suggestion/new.html.twig', [
+            'suggestion_form' => $form->createView(),
+            'poll_suggestions' => $pollSuggestions,
+        ]);
     }
 }

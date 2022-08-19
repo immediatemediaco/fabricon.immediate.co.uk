@@ -27,6 +27,12 @@ class Suggestion
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?DateTimeInterface $date = null;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private ?bool $isPoll = false;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $votes = 0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,5 +84,34 @@ class Suggestion
         $this->date = $date;
 
         return $this;
+    }
+
+    public function isPoll(): ?bool
+    {
+        return $this->isPoll;
+    }
+
+    public function setIsPoll(?bool $isPoll): self
+    {
+        $this->isPoll = $isPoll;
+
+        return $this;
+    }
+
+    public function getVotes(): ?int
+    {
+        return $this->votes;
+    }
+
+    public function setVotes(?int $votes): self
+    {
+        $this->votes = $votes;
+
+        return $this;
+    }
+
+    public function upVote(): void
+    {
+        $this->votes++;
     }
 }

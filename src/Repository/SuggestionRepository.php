@@ -19,6 +19,24 @@ class SuggestionRepository extends ServiceEntityRepository
         parent::__construct($registry, Suggestion::class);
     }
 
+    public function add(Suggestion $suggestion, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($suggestion);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(Suggestion $suggestion, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($suggestion);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
     // /**
     //  * @return Suggestion[] Returns an array of Suggestion objects
     //  */
