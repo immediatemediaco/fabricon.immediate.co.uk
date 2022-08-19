@@ -109,4 +109,9 @@ class Suggestion
 
         return $this;
     }
+
+    public function upVote(): void
+    {
+        $this->votes++;
+    }
 }
