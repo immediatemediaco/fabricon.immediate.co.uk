@@ -1,33 +1,54 @@
 <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#suggestionModal">
-    Suggest a topic
+    Suggest or vote for a topic
 </button>
 
 <div class="modal fade" id="suggestionModal" tabindex="-1" aria-labelledby="suggestionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="suggestionModalLabel">Suggest a topic</h5>
+                <h5 class="modal-title" id="suggestionModalLabel">Suggest or vote for a topic</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {{ form_start(suggestion_form) }}
-                <div class="form-group mb-3">
-                    {{ form_label(suggestion_form.name, 'Your name(s)') }}
-                    {{ form_widget(suggestion_form.name) }}
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="suggestion-tab" data-bs-toggle="tab" data-bs-target="#suggestion" type="button" role="tab" aria-controls="suggestion" aria-selected="true">Make a suggestion</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="vote-tab" data-bs-toggle="tab" data-bs-target="#vote" type="button" role="tab" aria-controls="vote" aria-selected="false">Vote for a suggestion</button>
+
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="suggestion" role="tabpanel" aria-labelledby="suggestion-tab">
+                        {{ form_start(suggestion_form) }}
+                        <div class="form-group mb-3">
+                            {{ form_label(suggestion_form.name, 'Your name(s)') }}
+                            {{ form_widget(suggestion_form.name) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form_widget(suggestion_form.type) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form_label(suggestion_form.topic) }}
+                            {{ form_widget(suggestion_form.topic) }}
+                        </div>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <label for="submitForm" class="btn btn-primary" tabindex="0">Submit</label>
+                        <input type="submit" id="submitForm" class="invisible">
+                        {{ form_end(suggestion_form) }}
+                    </div>
+                    <div class="tab-pane fade" id="vote" role="tabpanel" aria-labelledby="vote-tab">
+                        <ul class="list-group">
+                            {% for suggestion in poll_suggestions %}
+                            <li class="list-group-item">{{ suggestion.topic }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
-                <div class="form-group mb-3">
-                    {{ form_widget(suggestion_form.type) }}
-                </div>
-                <div class="form-group mb-3">
-                    {{ form_label(suggestion_form.topic) }}
-                    {{ form_widget(suggestion_form.topic) }}
-                </div>
-                <input type="submit" id="submitForm" class="invisible">
-                {{ form_end(suggestion_form) }}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                <label for="submitForm" class="btn btn-primary" tabindex="0">Submit</label>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
