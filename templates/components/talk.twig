@@ -3,7 +3,7 @@
     <h5 class="talk__title">{{- talk.title -}}</h5>
     <div class="talk__description">
         {% if talk.description %}
-            <p>{{- talk.description -}}</p>
+            {{ talk.description | raw }}
         {% endif %}
         {% if talk.moderator %}
             <p>Moderated by {{ talk.moderator }}</p>
