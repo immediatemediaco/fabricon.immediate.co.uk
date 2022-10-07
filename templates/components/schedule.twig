@@ -12,13 +12,13 @@
 
         {% if slot.track1 %}
             <div class="schedule__session schedule__session--track-1">
-                <p class="schedule__track-label schedule__track-label--track-1">Cyan: VH Floor 5 Boardroom</p>
+                <p class="schedule__track-label schedule__track-label--track-1">Cyan: VH Floor 5 Boardroom East</p>
                 {% include 'components/talk.twig' with { talk : slot.track1, track : 1 } only %}
             </div>
         {% endif %}
         {% if slot.track2 %}
             <div class="schedule__session schedule__session--track-2">
-                <p class="schedule__track-label schedule__track-label--track-2">Magenta: VH Ground Floor Bar Area</p>
+                <p class="schedule__track-label schedule__track-label--track-2">Magenta: VH Floor 5 Boardroom West</p>
                 {% include 'components/talk.twig' with { talk : slot.track2, track : 2 } only %}
             </div>
         {% endif %}
