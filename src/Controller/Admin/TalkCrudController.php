@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 
@@ -39,7 +40,7 @@ class TalkCrudController extends AbstractCrudController
         yield FormField::addPanel('Talk Details')
             ->setIcon('fa fa-chalkboard-teacher');
         yield TextField::new('title');
-        yield TextareaField::new('description')->hideOnIndex();
+        yield TextEditorField::new('description')->hideOnIndex();
         yield DateIntervalField::new('duration');
         yield AssociationField::new('organiser')->setQueryBuilder(
             fn (QueryBuilder $qb) => $this->role($qb, 'isOrganiser')
