@@ -2,5 +2,15 @@
   background-color: var(--clr-primary-100);
   padding: 70px;
   height: 220px;
-  color: var(--clr-neutral-200);
+  text-align: center;
+
+  &__logo {
+    margin-bottom: 1rem;
+  }
+
+  &__copy {
+    color: var(--clr-neutral-200);
+    font-size: 0.8rem;
+    margin: 0;
+  }
 }
