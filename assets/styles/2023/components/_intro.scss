@@ -1,0 +1,30 @@
+.intro {
+  display: flex;
+  justify-content: space-between;
+  padding: 60px 70px 40px;
+}
+
+.intro-title {
+  font-size: var(--fs-intro-heading);
+  font-weight: var(--fw-extra-bold);
+  margin-block-end: 10px;
+}
+
+.intro-lead {
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-medium);
+}
+
+.intro-content {
+  width: 860px;
+}
+
+.intro-content > p {
+  margin-block-end: 40px;
+}
+
+.intro-img img {
+  width: 420px;
+  border-radius: 20px;
+  margin-bottom: 40px;
+}
