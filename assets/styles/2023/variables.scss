@@ -1,0 +1,23 @@
+:root {
+  --clr-primary-100: hsl(195, 94%, 13%);
+  --clr-primary-400: hsl(195, 79%, 28%);
+  --clr-primary-700: hsl(195, 65%, 57%);
+
+  --clr-neutral-100: hsl(0, 0%, 100%);
+  --clr-neutral-200: hsl(32, 81%, 94%);
+  --clr-neutral-200-light: hsl(32, 81%, 94%, 0.5);
+
+  --clr-accent-400: hsl(39, 100%, 50%);
+
+  --ff-body: 'Montserrat', sans-serif;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-extra-bold: 800;
+
+  --fs-body: 1.375rem;
+  --fs-heading: 2.875rem;
+  --fs-intro-heading: 2.5rem;
+  --fs-lead: 1.875rem;
+}

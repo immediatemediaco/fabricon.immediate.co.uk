@@ -6,7 +6,7 @@ RUN set -eux; \
 
 ENV APP_ENV=prod COMPOSER_ALLOW_SUPERUSER=1
 
-COPY --from=composer:2.3 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.4 /usr/bin/composer /usr/bin/composer
 
 COPY ./composer.* ./symfony.lock ./
 
