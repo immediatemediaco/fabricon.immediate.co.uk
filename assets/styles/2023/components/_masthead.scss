@@ -1,0 +1,51 @@
+.masthead {
+  color: var(--clr-neutral-200);
+  background-color: var(--clr-primary-700);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 46.875rem;
+  z-index: -1;
+
+  &__img {
+    opacity: 0.2;
+  }
+
+  &__heading {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    position: absolute;
+  }
+
+  &__title {
+    font-size: var(--fs-heading);
+    font-weight: var(--fw-extra-bold);
+  }
+
+  &__title-underline {
+    display: flex;
+    gap: 10px;
+    margin-block: 10px;
+  }
+
+  &__title-underline > *, &__title-underline::before, &__title-underline::after {
+    content: '';
+    height: 5px;
+    width: 30px;
+  }
+
+  &__title-underline::before {
+    background-color: var(--clr-neutral-200);
+    width: 130px;
+  }
+
+  &__title-underline > * {
+    background-color: var(--clr-accent-400);
+  }
+
+  &__title-underline::after {
+    background-color: var(--clr-primary-400);
+  }
+}

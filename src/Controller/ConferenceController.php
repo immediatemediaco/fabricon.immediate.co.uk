@@ -30,7 +30,17 @@ class ConferenceController extends AbstractController
         $nextConference = $this->conferences->findNext($conference->getDate());
         $previousConference = $this->conferences->findPrevious($conference->getDate());
 
+        $loader = $this->twig->getLoader();
+
         if ($conference->getHoldingPageEnabled() && (! $this->isGranted('ROLE_ADMIN'))) {
+            $holdingTemplate = sprintf('conference/%s/holding.html.twig', $conference->getSlug());
+            if ($loader->exists($holdingTemplate)) {
+                return $this->render(
+                    $holdingTemplate,
+                    compact('conference', 'nextConference', 'previousConference', 'settings')
+                );
+            }
+
             return $this->render(
                 'conference/holding.html.twig',
                 compact('conference', 'nextConference', 'previousConference', 'settings')
@@ -38,8 +48,6 @@ class ConferenceController extends AbstractController
         }
 
         $schedule = $this->slots->findByConference($conference, ['startTime' => 'ASC']);
-
-        $loader = $this->twig->getLoader();
 
         $conferenceTemplate = sprintf('conference/%s/index.html.twig', $conference->getSlug());
 

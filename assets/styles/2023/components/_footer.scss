@@ -1,0 +1,14 @@
+footer, .footer {
+    display: grid;
+    gap: 1rem;
+    place-items: center;
+    place-content: center;
+    background-color: var(--clr-primary-700);
+    height: 220px;
+
+    &__copy {
+        color: var(--clr-neutral-100);
+        font-size: 0.8rem;
+        margin: 0;
+    }
+}

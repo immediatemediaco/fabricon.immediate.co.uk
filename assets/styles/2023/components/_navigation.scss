@@ -1,0 +1,15 @@
+.nav {
+  background-color: var(--clr-primary-700);
+  height: 6.25rem;
+  margin-block-end: -6.25rem;
+
+  &__logo {
+    padding-inline: 4.375rem;
+  }
+}
+
+.nav > .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}

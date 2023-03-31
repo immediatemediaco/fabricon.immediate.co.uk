@@ -1,0 +1,48 @@
+.conference {
+    &__intro {
+        background-color: var(--clr-neutral-100);
+        display: flex;
+        justify-content: space-between;
+        padding: 60px 70px 40px;
+    }
+
+    &__intro-content {
+        width: 860px;
+    }
+
+    &__intro-content > p {
+        margin-block-end: 40px;
+    }
+
+    &__intro-title {
+        font-size: var(--fs-intro-heading);
+        font-weight: var(--fw-extra-bold);
+        margin-block-end: 1.6rem;
+    }
+
+    &__intro-lead {
+        font-size: var(--fs-lead);
+        font-weight: var(--fw-medium);
+    }
+
+    .conference__intro-img {
+        margin-inline-start: 20px;
+    }
+
+    &__intro-img > * {
+        width: 420px;
+        border-radius: 20px;
+        margin-bottom: 40px;
+    }
+}
+
+@media(max-width: 768px) {
+    .conference {
+        &__intro {
+            padding: 20px;
+        }
+        &__intro-img {
+            display: none;
+        }
+    }
+}

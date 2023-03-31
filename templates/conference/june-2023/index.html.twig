@@ -1,0 +1,169 @@
+{% extends 'base-2023.html.twig' %}
+
+{% block title conference.siteTitle %}
+
+{% block body %}
+    <nav class="nav">
+        <div class="container">
+            <div class="nav__logo">
+                <img srcset="{{ asset('build/images/fabric-con.png') }} 1x, {{ asset('build/images/fabric-con.png') }} 2x"
+                     src="{{ asset('build/images/fabric-con.png') }}"
+                     width="210"
+                     alt="Logo"
+                />
+            </div>
+        </div>
+    </nav>
+    <header class="masthead container">
+        <img src="https://placekitten.com/2880/1500"
+             class="masthead__img"
+             alt="Masthead image">
+        <div class="masthead__heading">
+            <h1 class="masthead__title">{{ conference.siteTitle }}</h1>
+            <div class="masthead__title-underline"><span></span></div>
+        </div>
+    </header>
+    <main class="conference container">
+        <section class="conference__intro">
+            <div class="conference__intro-content">
+                <h2 class="conference__intro-title">About Fabric Conference</h2>
+                <p class="conference__intro-lead">
+                    Welcome back to FabriCon! This is our opportunity to take a day to learn from each other about
+                    Fabric's tech, development processes and future plans. We’re covering a wide range of topics,
+                    letting you recap on familiar topics and dip your toes into whole new areas.
+                </p>
+                <p>
+                    This is a hybrid event hosted in London and online using Microsoft Teams Live. Please see the agenda
+                    below for details of the Vineyard House viewing rooms for each track. In addition, each presentation
+                    has its own Teams Live session, so follow the “Join on Microsoft Teams” link to join at the right
+                    time. If you’re unable to attend on the day, or you can’t choose between two talks, you can come
+                    back and watch at any time, as all talks will be recorded.
+                </p>
+                <p>
+                    To join a session's Q&A, or any other interactive activity such as polls or quizzes, follow the
+                    "Slido event #" link at any time during the presentation.
+                </p>
+                <p>
+                    If you have any questions you’d like to send through to a speaker ahead of the conference, please
+                    use the “Submit a question” form.
+                </p>
+            </div>
+            <div class="conference__intro-img">
+                <img src="https://placekitten.com/840/600"
+                     alt="Intro image 1">
+                <img src="https://placekitten.com/g/840/600"
+                     alt="Intro image 2">
+            </div>
+        </section>
+        <section class="schedule">
+            <div class="schedule__heading">
+                <h2 class="schedule__title">Schedule</h2>
+            </div>
+            <div class="track__heading">
+                <h3 class="track__title">Track 1 - VH Floor 5 Board Room</h3>
+                <h3 class="track__title">Track 2 - Ground Floor Bar Area</h3>
+            </div>
+            <div class="schedule__break">
+                <h4 class="schedule__break-text">Drinks Break</h4>
+                <p class="schedule__break-time">9.30-9.50am</p>
+            </div>
+            <div class="session session__track--1">
+                <div class="session__heading">
+                    <div class="session__people">Roxanne Fisher, Becca Bailey</div>
+                    <div class="session__time">10.25-11.00am</div>
+                </div>
+                <h5 class="session__title">Adoption of Fabric Features</h5>
+                <p class="session__content">
+                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
+                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
+                    gathering feedback from the editorial teams.
+                </p>
+                <p class="session__content">
+                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
+                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
+                    gathering feedback from the editorial teams.
+                </p>
+                <div class="session__footer">Moderated by Nicole Gerrard</div>
+            </div>
+            <div class="session session__track--2">
+                <div class="session__heading">
+                    <div class="session__people">Roxanne Fisher, Becca Bailey</div>
+                    <div class="session__time">10.25-11.00am</div>
+                </div>
+                <h5 class="session__title">Adoption of Fabric Features</h5>
+                <p class="session__content">
+                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
+                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
+                    gathering feedback from the editorial teams.
+                </p>
+                <div class="session__footer">Moderated by Nicole Gerrard</div>
+            </div>
+            <div class="session session__track--2">
+                <div class="session__heading">
+                    <div class="session__people">Roxanne Fisher, Becca Bailey</div>
+                    <div class="session__time">10.25-11.00am</div>
+                </div>
+                <h5 class="session__title">Adoption of Fabric Features</h5>
+                <p class="session__content">
+                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
+                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
+                    gathering feedback from the editorial teams.
+                </p>
+                <div class="session__footer">Moderated by Nicole Gerrard</div>
+            </div>
+            <div class="schedule__break">
+                <h4 class="schedule__break-text">Drinks Break</h4>
+                <p class="schedule__break-time">9.30-9.50am</p>
+            </div>
+            <div class="session session__track--1">
+                <div class="session__heading">
+                    <div class="session__people">Roxanne Fisher, Becca Bailey</div>
+                    <div class="session__time">10.25-11.00am</div>
+                </div>
+                <h5 class="session__title">Adoption of Fabric Features</h5>
+                <p class="session__content">
+                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
+                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
+                    gathering feedback from the editorial teams.
+                </p>
+                <div class="session__footer">Moderated by Nicole Gerrard</div>
+            </div>
+            <div class="session session__track--1">
+                <div class="session__heading">
+                    <div class="session__people">Roxanne Fisher, Becca Bailey</div>
+                    <div class="session__time">10.25-11.00am</div>
+                </div>
+                <h5 class="session__title">Adoption of Fabric Features</h5>
+                <p class="session__content">
+                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
+                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
+                    gathering feedback from the editorial teams.
+                </p>
+                <div class="session__footer">Moderated by Nicole Gerrard</div>
+            </div>
+            <div class="session session__track--2">
+                <div class="session__heading">
+                    <div class="session__people">Roxanne Fisher, Becca Bailey</div>
+                    <div class="session__time">10.25-11.00am</div>
+                </div>
+                <h5 class="session__title">Adoption of Fabric Features</h5>
+                <p class="session__content">
+                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
+                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
+                    gathering feedback from the editorial teams.
+                </p>
+                <p class="session__content">
+                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
+                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
+                    gathering feedback from the editorial teams.
+                </p>
+                <div class="session__footer">Moderated by Nicole Gerrard</div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <img class="footer__logo" src="{{ asset('build/images/im-logo.png') }}" alt="Immediate Media" width="150"
+             height="60" loading="lazy">
+        <p class="footer__copy">&copy; 2020-{{ "now"|date("Y") }} Copyright Immediate Media Co.</p>
+    </footer>
+{% endblock %}
