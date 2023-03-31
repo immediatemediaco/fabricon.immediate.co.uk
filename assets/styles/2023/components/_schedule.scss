@@ -3,7 +3,7 @@
   --padding: 20px;
   display: grid;
   grid-template-columns: var(--gutter) repeat(2, 1fr) var(--gutter);
-  background: linear-gradient(90deg, var(--clr-neutral-200) 50%, var(--clr-neutral-200-light) 50%);
+  background: linear-gradient(90deg, var(--clr-neutral-200) 50%, hsl(var(--clr-neutral-hsl-200) / 0.5) 50%);
   color: var(--clr-neutral-200);
   padding-block-end: var(--padding);
 
@@ -11,6 +11,8 @@
     grid-column: 1/-1;
     padding: 30px var(--gutter);
     background-color: var(--clr-primary-700);
+    position: sticky;
+    top: 0;
   }
 
   &__title {
@@ -60,6 +62,8 @@
     grid-column: 1/-1;
     background-color: var(--clr-primary-400);
     padding: var(--padding) var(--gutter);
+    position: sticky;
+    top: 5.78rem;
   }
 
   &__title:nth-child(2) {
