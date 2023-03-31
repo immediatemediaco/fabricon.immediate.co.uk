@@ -2,7 +2,7 @@ ARG ASSETS_IMAGE
 
 FROM ${ASSETS_IMAGE} AS assets
 
-FROM nginx:1.19-alpine
+FROM nginx:1.23-alpine
 
 WORKDIR /var/www/html
 
