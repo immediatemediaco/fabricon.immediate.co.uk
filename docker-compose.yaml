@@ -4,6 +4,7 @@ services:
         build:
             context: .
             dockerfile: ./docker/Dockerfile
+            target: app
         environment:
             APP_ENV: dev
             OPCACHE_VALIDATE_TIMESTAMPS: 1
@@ -14,10 +15,9 @@ services:
     web:
         image: fabricon-web:local
         build:
-            args:
-                ASSETS_IMAGE: fabricon-app:local
             context: .
-            dockerfile: ./docker/nginx/Dockerfile
+            dockerfile: ./docker/Dockerfile
+            target: web
         ports:
             - 8000:80
         depends_on:

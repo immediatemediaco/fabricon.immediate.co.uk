@@ -1,4 +1,4 @@
-FROM ghcr.io/immediate-media/php:8.1-fpm
+FROM ghcr.io/immediate-media/php:8.1-fpm as app
 
 RUN set -eux; \
     apk --update add --no-cache postgresql-dev; \
@@ -26,3 +26,10 @@ RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
+
+FROM nginx:1.23-alpine as web
+
+WORKDIR /var/www/html
+
+COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/
+COPY --from=app /var/www/html/public ./public
