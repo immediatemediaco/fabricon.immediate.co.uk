@@ -1,17 +1,28 @@
 # fabricon.immediate.co.uk
-Fabric Conference Site
+The Fabric Conference Site.
 
-Guide to run locally:
+## Running Locally
+Make sure you have [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/),
+and [Yarn](https://yarnpkg.com/) installed.
 
-docker-compose build
-docker-compose up -d
+
+Clone the repo and run the following commands to get the site running locally:
+```shell
+# Build the Docker images
+docker compose build
+
+# Start the containers
+docker compose up -d
+
+# Install the Yarn dependencies
 yarn install
-yarn run build
 
-yarn watch to compile frontend assets while developing
+# Start the Webpack dev server to build frontend assets and to enable HMR
+yarn dev-server
+```
 
-to view locally:
-http://localhost:8000
+The site should now be running at http://localhost:8000.
 
-Admin area:
-http://localhost:8000/admin (admin: 'admin' and password: 'password' to log in)
+The Admin area can be accessed at http://localhost:8000/admin. Log in with the following credentials:
+- Username: admin
+- Password: password
