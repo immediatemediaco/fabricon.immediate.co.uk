@@ -111,6 +111,15 @@
     font-weight: var(--fw-bold);
   }
 
+  &__people {
+    flex-basis: 60%;
+  }
+
+  &__time {
+    flex-basis: 30%;
+    text-align: right;
+  }
+
   &__title::before {
     display: block;
     margin-block-end: 4px;
@@ -119,7 +128,8 @@
     width: 30px;
   }
 
-  &__track--1 &__title::before {
+  &__track--1 &__title::before,
+  &__track--1 &__location::after {
     background-color: var(--clr-accent-400);
   }
 
@@ -130,6 +140,18 @@
     margin-block: 10px var(--padding);
   }
 
+  &__location {
+    display: none;
+    width: 100%;
+    font-size: 1.125rem;
+    font-weight: var(--fw-medium);
+    margin-block: calc( -1 * var(--padding)) 10px;
+  }
+
+  &__location::before {
+    content: '📍';
+    padding-right: 5px;
+  }
   &__content {
     margin-block-end: var(--padding);
     flex-grow: 1;
@@ -173,9 +195,14 @@
     &__track--1 {
       margin-inline-end: 0;
     }
+
     &__track--2 {
       margin-inline-start: 0;
       grid-column-start: 2;
+    }
+
+    &__location {
+      display: block;
     }
   }
 }

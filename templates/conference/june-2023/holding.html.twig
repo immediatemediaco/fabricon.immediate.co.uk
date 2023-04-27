@@ -15,9 +15,12 @@
         </div>
     </nav>
     <header class="masthead container">
-        <img src="{{ asset('build/images/fabricon-main.jpg') }}"
-             class="masthead__img"
-             alt="Masthead image">
+        <picture class="masthead__picture">
+            <source media="(max-width: 600px)" srcset="{{ asset('build/images/fabricon-main-square.jpg') }}">
+            <source media="(max-width: 1023px)" srcset="{{ asset('build/images/fabricon-main-small.jpg') }}">
+            <source media="(min-width: 1024px)" srcset="{{ asset('build/images/fabricon-main.jpg') }}">
+            <img alt="Masthead image" src="{{ asset('build/images/fabricon-main.jpg') }}">
+        </picture>
         <div class="masthead__heading">
             <h1 class="masthead__title">{{ conference.siteTitle }}</h1>
             <div class="masthead__title-underline"><span></span></div>

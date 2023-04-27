@@ -23,3 +23,12 @@
   --fs-intro-heading: 2.5rem;
   --fs-lead: 1.6rem;
 }
+
+@media (max-width: 576px) {
+  :root {
+  --fs-body: 1rem;
+  --fs-heading: 2rem;
+  --fs-intro-heading: 2rem;
+  --fs-lead: 1.2rem;
+  }
+}
