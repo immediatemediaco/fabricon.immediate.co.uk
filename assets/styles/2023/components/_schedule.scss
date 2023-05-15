@@ -30,7 +30,7 @@
     color: var(--clr-primary-700);
     padding: 35px;
     border-radius: 20px;
-    margin-block: var(--padding) 40px;
+    margin-block-end: var(--padding);
   }
 
   &__break-text {
@@ -51,6 +51,7 @@
     grid-template-columns: var(--padding) 1fr var(--padding);
     &__heading {
       padding: var(--padding);
+      margin-block-end: var(--padding);
     }
   }
 }
@@ -63,7 +64,8 @@
     background-color: var(--clr-primary-400);
     padding: var(--padding) var(--gutter);
     position: sticky;
-    top: 5.78rem;
+    top: 92px;
+    margin-block-end: var(--padding);
   }
 
   &__title:nth-child(2) {
@@ -157,6 +159,16 @@
     flex-grow: 1;
   }
 
+  &__content a {
+    color: var(--clr-primary-200);
+    font-weight: var(--fw-bold);
+    transition: color 100ms linear;
+  }
+
+  &__content a:hover {
+    color: var(--clr-primary-400);
+  }
+
   &__track--1 &__footer::before {
     background-color: var(--clr-primary-400);
   }
@@ -185,8 +197,25 @@
     background-color: var(--clr-primary-700);
   }
 
+  &__track--2 &__content a {
+    color: var(--clr-primary-200);
+    font-weight: var(--fw-bold);
+    transition: color 100ms linear;
+  }
+
+  &__track--2 &__content a:hover {
+    color: var(--clr-primary-700);
+  }
+
   &__track--2 &__footer::before {
     background-color: var(--clr-accent-400);
+  }
+
+  &__link {
+    display: block;
+    margin-block-start: 0.75rem;
+    color: var(--clr-neutral-200);
+    font-weight: var(--fw-bold);
   }
 }
 

@@ -1,5 +1,5 @@
 .modal {
-    max-width: 90%;
+    min-width: min(768px, 90vw);
     margin: auto;
     border: 1px solid rgb(0 0 0 / .2);
     border-radius: 0.3rem;

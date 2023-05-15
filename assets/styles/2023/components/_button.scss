@@ -7,6 +7,14 @@
     cursor: pointer;
     padding: 1.15em 1.85em;
     transition: background 100ms linear;
+    margin-block-end: 1rem;
+}
+
+a.button {
+    color: var(--clr-neutral-100) !important;
+    display: inline-block;
+    text-decoration: none;
+    margin-block-end: 1rem;
 }
 
 .button:hover,

@@ -31,25 +31,23 @@
             <div class="conference__intro-content">
                 <h2 class="conference__intro-title">About Fabric Conference</h2>
                 <p class="conference__intro-lead">
-                    Welcome back to FabriCon! This is our opportunity to take a day to learn from each other about
-                    Fabric's tech, development processes and future plans. We’re covering a wide range of topics,
-                    letting you recap on familiar topics and dip your toes into whole new areas.
+                    {{ conference.about|striptags }}
                 </p>
-                <p>
-                    This is a hybrid event hosted in London and online using Microsoft Teams Live. Please see the agenda
-                    below for details of the Vineyard House viewing rooms for each track. In addition, each presentation
-                    has its own Teams Live session, so follow the “Join on Microsoft Teams” link to join at the right
-                    time. If you’re unable to attend on the day, or you can’t choose between two talks, you can come
-                    back and watch at any time, as all talks will be recorded.
-                </p>
-                <p>
-                    To join a session's Q&A, or any other interactive activity such as polls or quizzes, follow the
-                    "Slido event #" link at any time during the presentation.
-                </p>
-                <p>
-                    If you have any questions you’d like to send through to a speaker ahead of the conference, please
-                    use the “Submit a question” form.
-                </p>
+                {{ settings.conferenceDetails|raw }}
+                {% if settings.currentConference is same as(conference) %}
+                    {% if conference.slackChannel and conference.slackChannelUrl %}
+                        <p>Follow updates throughout the day using <a href="{{ conference.slackChannelUrl }}"
+                                                                      target="_blank">{{ conference.slackChannel }}</a>
+                            on Slack.</p>
+                    {% endif %}
+                    <div class="conference__ctas">
+                        {{ render(controller('App\\Controller\\QuestionController::new')) }}
+                        {% if conference.feedbackFormUrl %}
+                            <a href="{{ conference.feedbackFormUrl }}" target="_blank" class="button">Submit
+                                feedback</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
             </div>
             <div class="conference__intro-img">
                 <img src="{{ asset('build/images/bar-area.jpg') }}"
@@ -66,108 +64,74 @@
                 <h3 class="track__title">Track 1 - VH Floor 5 Board Room</h3>
                 <h3 class="track__title">Track 2 - Ground Floor Bar Area</h3>
             </div>
+            {% for slot in schedule %}
+            {% if slot.track1 %}
+            <div class="session session__track--1">
+                <div class="session__heading">
+                    <div class="session__people">{{ slot.track1.speakers|join(', ') }}</div>
+                    <div class="session__time">
+                        {{ slot.startTime|date('H:i') }}-{{ slot.endTime|date('H:i') }}
+                    </div>
+                </div>
+                <h5 class="session__title">{{- slot.track1.title -}}</h5>
+                <div class="session__location">VH Floor 5 Boardroom East</div>
+                <div class="session__content">
+                    {% if slot.track1.description %}
+                        {{ slot.track1.description | raw }}
+                    {% endif %}
+                </div>
+                <div class="session__footer">
+                {% if slot.track1.moderator %}
+                    Moderated by {{ slot.track1.moderator }}
+                {% endif %}
+                {% if slot.track1.slackChannelUrl and slot.track1.slackChannel %}
+                    <a href="{{ slot.track1.slackChannelUrl }}" class="session__link" target="_blank"><i
+                                class="talk__icon icon icon--slack"></i>{{ slot.track1.slackChannel }}</a>
+                {% elseif slot.track1.slackChannel %}
+                    <p class="session__link"><i class="talk__icon icon icon--slack"></i>{{ slot.track1.slackChannel }}</p>
+                {% endif %}
+                {% if slot.track1.teamsUrl %}
+                    <a href="{{ slot.track1.teamsUrl }}" class="session__link" target="_blank"><i class="talk__icon icon icon--teams"></i>Join on Microsoft
+                        Teams</a>
+                {% endif %}
+                {% if slot.track1.slidoUrl %}
+                    <a href="{{ slot.track1.slidoUrl }}" class="session__link" target="_blank"><i
+                                class="talk__icon icon icon--slido"></i>{{ slot.track1.slidoText ?: slot.track1.slidoUrl }}</a>
+                {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% if slot.track2 %}
+            <div class="session session__track--2">
+                <div class="session__heading">
+                    <div class="session__people">{{ slot.track2.speakers|join(', ') }}</div>
+                    <div class="session__time">
+                        {{ slot.startTime|date('H:i') }}-{{ slot.endTime|date('H:i') }}
+                    </div>
+                </div>
+                <h5 class="session__title">{{- slot.track2.title -}}</h5>
+                <div class="session__location">VH Floor 5 Boardroom West</div>
+                <div class="session__content">
+                    {% if slot.track2.description %}
+                        {{ slot.track2.description | raw }}
+                    {% endif %}
+                </div>
+                {% if slot.track2.moderator %}
+                    <div class="session__footer">
+                        Moderated by {{ slot.track2.moderator }}
+                    </div>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% if slot.breakDetails %}
             <div class="schedule__break">
-                <h4 class="schedule__break-text">Drinks Break</h4>
-                <p class="schedule__break-time">9.30-9.50am</p>
-            </div>
-            <div class="session session__track--1">
-                <div class="session__heading">
-                    <div class="session__people">Roxanne Fisher, Becca Bailey</div>
-                    <div class="session__time">10.25-11.00am</div>
-                </div>
-                <h5 class="session__title">Adoption of Fabric Features</h5>
-                <div class="session__location">VH Floor 5 Board Room East</div>
-                <p class="session__content">
-                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
-                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
-                    gathering feedback from the editorial teams.
+                <h4 class="schedule__break-text">{{ slot.breakDetails }}</h4>
+                <p class="schedule__break-time">
+                    {{ slot.startTime|date('H:i') }}-{{ slot.endTime|date('H:i') }}
                 </p>
-                <p class="session__content">
-                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
-                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
-                    gathering feedback from the editorial teams.
-                </p>
-                <div class="session__footer">Moderated by Nicole Gerrard</div>
             </div>
-            <div class="session session__track--2">
-                <div class="session__heading">
-                    <div class="session__people">Roxanne Fisher, Becca Bailey</div>
-                    <div class="session__time">10.25-11.00am</div>
-                </div>
-                <h5 class="session__title">Adoption of Fabric Features</h5>
-                <div class="session__location">VH Floor 5 Board Room East</div>
-                <p class="session__content">
-                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
-                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
-                    gathering feedback from the editorial teams.
-                </p>
-                <div class="session__footer">Moderated by Nicole Gerrard</div>
-            </div>
-            <div class="session session__track--2">
-                <div class="session__heading">
-                    <div class="session__people">Roxanne Fisher, Becca Bailey</div>
-                    <div class="session__time">10.25-11.00am</div>
-                </div>
-                <h5 class="session__title">Adoption of Fabric Features</h5>
-                <div class="session__location">VH Floor 5 Board Room East</div>
-                <p class="session__content">
-                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
-                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
-                    gathering feedback from the editorial teams.
-                </p>
-                <div class="session__footer">Moderated by Nicole Gerrard</div>
-            </div>
-            <div class="schedule__break">
-                <h4 class="schedule__break-text">Drinks Break</h4>
-                <p class="schedule__break-time">9.30-9.50am</p>
-            </div>
-            <div class="session session__track--1">
-                <div class="session__heading">
-                    <div class="session__people">Roxanne Fisher, Becca Bailey</div>
-                    <div class="session__time">10.25-11.00am</div>
-                </div>
-                <h5 class="session__title">Adoption of Fabric Features</h5>
-                <div class="session__location">VH Floor 5 Board Room East</div>
-                <p class="session__content">
-                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
-                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
-                    gathering feedback from the editorial teams.
-                </p>
-                <div class="session__footer">Moderated by Nicole Gerrard</div>
-            </div>
-            <div class="session session__track--1">
-                <div class="session__heading">
-                    <div class="session__people">Roxanne Fisher, Becca Bailey</div>
-                    <div class="session__time">10.25-11.00am</div>
-                </div>
-                <h5 class="session__title">Adoption of Fabric Features</h5>
-                <div class="session__location">VH Floor 5 Board Room East</div>
-                <p class="session__content">
-                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
-                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
-                    gathering feedback from the editorial teams.
-                </p>
-                <div class="session__footer">Moderated by Nicole Gerrard</div>
-            </div>
-            <div class="session session__track--2">
-                <div class="session__heading">
-                    <div class="session__people">Roxanne Fisher, Becca Bailey</div>
-                    <div class="session__time">10.25-11.00am</div>
-                </div>
-                <h5 class="session__title">Adoption of Fabric Features</h5>
-                <div class="session__location">VH Floor 5 Board Room East</div>
-                <p class="session__content">
-                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
-                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
-                    gathering feedback from the editorial teams.
-                </p>
-                <p class="session__content">
-                    This session covers the process of rolling out Fabric features to editorial teams – using the Olive
-                    rollout of MyHub and Reactions as a case study and the collaborative process of testing and
-                    gathering feedback from the editorial teams.
-                </p>
-                <div class="session__footer">Moderated by Nicole Gerrard</div>
-            </div>
+            {% endif %}
+            {% endfor %}
         </section>
     </main>
     <footer class="footer">
