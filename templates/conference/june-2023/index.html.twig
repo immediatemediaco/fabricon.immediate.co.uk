@@ -61,8 +61,8 @@
                 <h2 class="schedule__title">Schedule</h2>
             </div>
             <div class="track__heading">
-                <h3 class="track__title">Track 1 - VH Floor 5 Board Room</h3>
-                <h3 class="track__title">Track 2 - Ground Floor Bar Area</h3>
+                <h3 class="track__title">Track 1 - {{ settings.track1Description }}</h3>
+                <h3 class="track__title">Track 2 - {{ settings.track2Description }}</h3>
             </div>
             {% for slot in schedule %}
             {% if slot.track1 %}
@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 <h5 class="session__title">{{- slot.track1.title -}}</h5>
-                <div class="session__location">VH Floor 5 Boardroom East</div>
+                <div class="session__location">{{ settings.track1Description }}</div>
                 <div class="session__content">
                     {% if slot.track1.description %}
                         {{ slot.track1.description | raw }}
@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 <h5 class="session__title">{{- slot.track2.title -}}</h5>
-                <div class="session__location">VH Floor 5 Boardroom West</div>
+                <div class="session__location">{{ settings.track2Description }}</div>
                 <div class="session__content">
                     {% if slot.track2.description %}
                         {{ slot.track2.description | raw }}
