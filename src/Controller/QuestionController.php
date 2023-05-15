@@ -48,6 +48,6 @@ class QuestionController extends AbstractController
             return $this->redirect($request->headers->get('referer'));
         }
 
-        return $this->render('question/new.html.twig', ['question_form' => $form->createView()]);
+        return $this->render('question/new-2023.html.twig', ['question_form' => $form->createView()]);
     }
 }
