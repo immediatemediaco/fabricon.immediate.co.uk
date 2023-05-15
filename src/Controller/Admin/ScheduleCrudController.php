@@ -14,18 +14,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
 
 class ScheduleCrudController extends AbstractCrudController
 {
-    private static array $breaks = [
-        'Drinks break',
-        'Lunch break',
-        'Pizza and drinks',
-    ];
-
     private string $indexPageTitle = '';
 
     public function __construct(
@@ -75,7 +69,7 @@ class ScheduleCrudController extends AbstractCrudController
         yield AssociationField::new('track2', 'Track 2');
         yield FormField::addPanel('Break Details')
             ->setIcon('fa fa-mug-hot');
-        yield ChoiceField::new('breakDetails')->setChoices(array_combine(self::$breaks, self::$breaks));
+        yield TextField::new('breakDetails');
     }
 
     public function indexPageTitle(): string

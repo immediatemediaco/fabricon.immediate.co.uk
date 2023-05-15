@@ -1,0 +1,59 @@
+.form-group {
+    padding-block: 1.2rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: var(--fw-medium);
+    padding-block-end: 0.5rem;
+}
+
+.required::after {
+    content: ' *';
+    color: var(--clr-accent-400);
+
+}
+
+input[type=text], select, textarea {
+    border: 1px solid rgb(0 0 0 / .2);
+    padding: 0.4em;
+    border-radius: 0.3rem;
+    width: 100%;
+}
+
+input[type=text]:focus, input[type=text]:focus-visible,
+select:focus, select:focus-visible,
+textarea:focus, textarea:focus-visible {
+    outline: 2px solid var(--clr-primary-200);
+}
+
+label.btn, button.btn {
+    font-weight: var(--fw-bold);
+    border: 0;
+    border-radius: 0.3em;
+    cursor: pointer;
+    padding: 0.6em 1.2em;
+    line-height: 1.1;
+    transition: background 100ms linear;
+}
+
+label.btn:hover, button.btn:hover,
+label.btn:focus-visible, button.btn:focus-visible {
+    background-color: var(--clr-primary-200);
+}
+
+.btn-primary {
+    background-color: var(--clr-primary-400);
+    color: var(--clr-neutral-100);
+}
+
+.btn-outline-secondary {
+    background-color: var(--clr-neutral-100);
+    outline: 1px solid var(--clr-primary-200);
+    color: var(--clr-primary-400);
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus-visible {
+    color: var(--clr-neutral-100);
+}

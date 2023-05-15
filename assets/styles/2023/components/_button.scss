@@ -1,0 +1,23 @@
+.button {
+    background-color: var(--clr-primary-400);
+    color: var(--clr-neutral-100);
+    font-weight: var(--fw-bold);
+    border: 0;
+    border-radius: 0.5em;
+    cursor: pointer;
+    padding: 1.15em 1.85em;
+    transition: background 100ms linear;
+    margin-block-end: 1rem;
+}
+
+a.button {
+    color: var(--clr-neutral-100) !important;
+    display: inline-block;
+    text-decoration: none;
+    margin-block-end: 1rem;
+}
+
+.button:hover,
+.button:focus-visible {
+    background-color: var(--clr-primary-200);
+}

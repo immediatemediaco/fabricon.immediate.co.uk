@@ -1,0 +1,142 @@
+{% extends 'base-2023.html.twig' %}
+
+{% block title conference.siteTitle %}
+
+{% block body %}
+    <nav class="nav">
+        <div class="container">
+            <div class="nav__logo">
+                <img srcset="{{ asset('build/images/fabric-con.png') }} 1x, {{ asset('build/images/fabric-con.png') }} 2x"
+                     src="{{ asset('build/images/fabric-con.png') }}"
+                     width="210"
+                     alt="Logo"
+                />
+            </div>
+        </div>
+    </nav>
+    <header class="masthead container">
+        <picture class="masthead__picture">
+            <source media="(max-width: 600px)" srcset="{{ asset('build/images/fabricon-main-square.jpg') }}">
+            <source media="(max-width: 1023px)" srcset="{{ asset('build/images/fabricon-main-small.jpg') }}">
+            <source media="(min-width: 1024px)" srcset="{{ asset('build/images/fabricon-main.jpg') }}">
+            <img alt="Masthead image" src="{{ asset('build/images/fabricon-main.jpg') }}">
+        </picture>
+        <div class="masthead__heading">
+            <h1 class="masthead__title">{{ conference.siteTitle }}</h1>
+            <div class="masthead__title-underline"><span></span></div>
+        </div>
+    </header>
+    <main class="conference container">
+        <section class="conference__intro">
+            <div class="conference__intro-content">
+                <h2 class="conference__intro-title">About Fabric Conference</h2>
+                <p class="conference__intro-lead">
+                    {{ conference.about|striptags }}
+                </p>
+                {{ settings.conferenceDetails|raw }}
+                {% if settings.currentConference is same as(conference) %}
+                    {% if conference.slackChannel and conference.slackChannelUrl %}
+                        <p>Follow updates throughout the day using <a href="{{ conference.slackChannelUrl }}"
+                                                                      target="_blank">{{ conference.slackChannel }}</a>
+                            on Slack.</p>
+                    {% endif %}
+                    <div class="conference__ctas">
+                        {{ render(controller('App\\Controller\\QuestionController::new')) }}
+                        {% if conference.feedbackFormUrl %}
+                            <a href="{{ conference.feedbackFormUrl }}" target="_blank" class="button">Submit
+                                feedback</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="conference__intro-img">
+                <img src="{{ asset('build/images/bar-area.jpg') }}"
+                     alt="Intro image 1">
+                <img src="{{ asset('build/images/bar-area-2.jpg') }}"
+                     alt="Intro image 2">
+            </div>
+        </section>
+        <section class="schedule">
+            <div class="schedule__heading">
+                <h2 class="schedule__title">Schedule</h2>
+            </div>
+            <div class="track__heading">
+                <h3 class="track__title">Track 1 - VH Floor 5 Board Room</h3>
+                <h3 class="track__title">Track 2 - Ground Floor Bar Area</h3>
+            </div>
+            {% for slot in schedule %}
+            {% if slot.track1 %}
+            <div class="session session__track--1">
+                <div class="session__heading">
+                    <div class="session__people">{{ slot.track1.speakers|join(', ') }}</div>
+                    <div class="session__time">
+                        {{ slot.startTime|date('H:i') }}-{{ slot.endTime|date('H:i') }}
+                    </div>
+                </div>
+                <h5 class="session__title">{{- slot.track1.title -}}</h5>
+                <div class="session__location">VH Floor 5 Boardroom East</div>
+                <div class="session__content">
+                    {% if slot.track1.description %}
+                        {{ slot.track1.description | raw }}
+                    {% endif %}
+                </div>
+                <div class="session__footer">
+                {% if slot.track1.moderator %}
+                    Moderated by {{ slot.track1.moderator }}
+                {% endif %}
+                {% if slot.track1.slackChannelUrl and slot.track1.slackChannel %}
+                    <a href="{{ slot.track1.slackChannelUrl }}" class="session__link" target="_blank"><i
+                                class="talk__icon icon icon--slack"></i>{{ slot.track1.slackChannel }}</a>
+                {% elseif slot.track1.slackChannel %}
+                    <p class="session__link"><i class="talk__icon icon icon--slack"></i>{{ slot.track1.slackChannel }}</p>
+                {% endif %}
+                {% if slot.track1.teamsUrl %}
+                    <a href="{{ slot.track1.teamsUrl }}" class="session__link" target="_blank"><i class="talk__icon icon icon--teams"></i>Join on Microsoft
+                        Teams</a>
+                {% endif %}
+                {% if slot.track1.slidoUrl %}
+                    <a href="{{ slot.track1.slidoUrl }}" class="session__link" target="_blank"><i
+                                class="talk__icon icon icon--slido"></i>{{ slot.track1.slidoText ?: slot.track1.slidoUrl }}</a>
+                {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% if slot.track2 %}
+            <div class="session session__track--2">
+                <div class="session__heading">
+                    <div class="session__people">{{ slot.track2.speakers|join(', ') }}</div>
+                    <div class="session__time">
+                        {{ slot.startTime|date('H:i') }}-{{ slot.endTime|date('H:i') }}
+                    </div>
+                </div>
+                <h5 class="session__title">{{- slot.track2.title -}}</h5>
+                <div class="session__location">VH Floor 5 Boardroom West</div>
+                <div class="session__content">
+                    {% if slot.track2.description %}
+                        {{ slot.track2.description | raw }}
+                    {% endif %}
+                </div>
+                {% if slot.track2.moderator %}
+                    <div class="session__footer">
+                        Moderated by {{ slot.track2.moderator }}
+                    </div>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% if slot.breakDetails %}
+            <div class="schedule__break">
+                <h4 class="schedule__break-text">{{ slot.breakDetails }}</h4>
+                <p class="schedule__break-time">
+                    {{ slot.startTime|date('H:i') }}-{{ slot.endTime|date('H:i') }}
+                </p>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </section>
+    </main>
+    <footer class="footer">
+        <img class="footer__logo" src="{{ asset('build/images/im-logo.png') }}" alt="Immediate Media" width="150"
+             height="60" loading="lazy">
+        <p class="footer__copy">&copy; 2020-{{ "now"|date("Y") }} Copyright Immediate Media Co.</p>
+    </footer>
+{% endblock %}

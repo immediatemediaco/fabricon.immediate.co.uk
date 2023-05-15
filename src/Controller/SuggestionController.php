@@ -59,7 +59,7 @@ class SuggestionController extends AbstractController
 
         $pollSuggestions = $this->suggestions->findBy(['isPoll' => true]);
 
-        return $this->render('suggestion/new.html.twig', [
+        return $this->render('suggestion/new-2023.html.twig', [
             'suggestion_form' => $form->createView(),
             'poll_suggestions' => $pollSuggestions,
         ]);

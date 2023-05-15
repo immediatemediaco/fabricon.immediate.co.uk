@@ -1,0 +1,17 @@
+.nav {
+  background-color: hsl(var(--clr-primary-hsl-700) / 0.9);
+  height: 6.25rem;
+  margin-block-end: -6.25rem;
+  position: sticky;
+  top: 0;
+
+  &__logo {
+    padding-inline: 4.375rem;
+  }
+}
+
+.nav > .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}

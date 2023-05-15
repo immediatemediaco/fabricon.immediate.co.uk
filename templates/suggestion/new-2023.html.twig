@@ -1,0 +1,27 @@
+<button class="button open-button">
+    Suggest a topic
+</button>
+<dialog class="modal">
+    <div class="modal__heading">
+        <h3>Suggest a topic</h3>
+    </div>
+    <strong>Note:</strong> Your suggestion may be anonymously selected for others to vote on.
+    {{ form_start(suggestion_form) }}
+    <div class="form-group">
+        {{ form_label(suggestion_form.name, 'Your name(s)') }}
+        {{ form_widget(suggestion_form.name) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(suggestion_form.type) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(suggestion_form.topic) }}
+        {{ form_widget(suggestion_form.topic) }}
+    </div>
+    <div class="modal__footer">
+        <button type="button" class="btn btn-outline-secondary close-button">Cancel</button>
+        <label for="submitForm" class="btn btn-primary" tabindex="0">Submit</label>
+        <input type="submit" id="submitForm" class="invisible">
+    </div>
+    {{ form_end(suggestion_form) }}
+</dialog>

@@ -1,0 +1,59 @@
+{% extends 'base-2023.html.twig' %}
+
+{% block title conference.siteTitle %}
+
+{% block body %}
+    <nav class="nav">
+        <div class="container">
+            <div class="nav__logo">
+                <img srcset="{{ asset('build/images/fabric-con.png') }} 1x, {{ asset('build/images/fabric-con.png') }} 2x"
+                     src="{{ asset('build/images/fabric-con.png') }}"
+                     width="210"
+                     alt="Logo"
+                />
+            </div>
+        </div>
+    </nav>
+    <header class="masthead container">
+        <picture class="masthead__picture">
+            <source media="(max-width: 600px)" srcset="{{ asset('build/images/fabricon-main-square.jpg') }}">
+            <source media="(max-width: 1023px)" srcset="{{ asset('build/images/fabricon-main-small.jpg') }}">
+            <source media="(min-width: 1024px)" srcset="{{ asset('build/images/fabricon-main.jpg') }}">
+            <img alt="Masthead image" src="{{ asset('build/images/fabricon-main.jpg') }}">
+        </picture>
+        <div class="masthead__heading">
+            <h1 class="masthead__title">{{ conference.siteTitle }}</h1>
+            <div class="masthead__title-underline"><span></span></div>
+        </div>
+    </header>
+    <main class="conference container">
+        <section class="conference__intro">
+            <div class="conference__intro-content">
+                {% if settings.introduction %}
+                    <h2 class="conference__intro-title">Introduction</h2>
+                    <p class="conference__intro-lead">
+                        FabriCon is an internal conference focused on Fabric technology. It represents an opportunity to
+                        gather all disciplines and teams across the department away from our usual sprints to share our
+                        knowledge and keep ourselves aligned.<br><br>
+                        The next conference will be on <strong>{{ conference.date|date('l, F jS') }}</strong>.
+                    </p>
+                    {{ render(controller('App\\Controller\\SuggestionController::new')) }}
+                    <p>{{ settings.introduction|raw }}</p>
+                {% else %}
+                    <h2 class="conference__intro-title">... COMING SOON ...</h2>
+                {% endif %}
+            </div>
+            <div class="conference__intro-img">
+                <img src="{{ asset('build/images/bar-area.jpg') }}"
+                     alt="Intro image 1">
+                <img src="{{ asset('build/images/bar-area-2.jpg') }}"
+                     alt="Intro image 2">
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <img class="footer__logo" src="{{ asset('build/images/im-logo.png') }}" alt="Immediate Media" width="150"
+             height="60" loading="lazy">
+        <p class="footer__copy">&copy; 2020-{{ "now"|date("Y") }} Copyright Immediate Media Co.</p>
+    </footer>
+{% endblock %}

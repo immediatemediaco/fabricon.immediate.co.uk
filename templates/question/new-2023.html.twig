@@ -1,0 +1,27 @@
+<button class="button open-button">
+    Submit a question
+</button>
+<dialog class="modal">
+    <div class="modal__heading">
+        <h3>Submit a question</h3>
+    </div>
+    {{ form_start(question_form) }}
+    <div class="form-group">
+        {{ form_label(question_form.name, 'Your name') }}
+        {{ form_widget(question_form.name) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(question_form.talk, 'Select talk') }}
+        {{ form_widget(question_form.talk) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(question_form.question, 'Question') }}
+        {{ form_widget(question_form.question) }}
+    </div>
+    <div class="modal__footer">
+        <button type="button" class="btn btn-outline-secondary close-button">Cancel</button>
+        <label for="submitForm" class="btn btn-primary" tabindex="0">Submit</label>
+        <input type="submit" id="submitForm" class="invisible">
+    </div>
+    {{ form_end(question_form) }}
+</dialog>

@@ -18,10 +18,10 @@ class AppFixtures extends Fixture
         }
 
         $conference = new Conference();
-        $conference->setName('November 2021');
-        $conference->setSlug('november-2021');
-        $conference->setSiteTitle('FabriCon November 2021');
-        $conference->setDate(DateTime::createFromFormat('j-M-Y', '16-November-2021'));
+        $conference->setName('June 2023');
+        $conference->setSlug('june-2023');
+        $conference->setSiteTitle('FabriCon June 2023');
+        $conference->setDate(DateTime::createFromFormat('j-M-Y', '9-June-2023'));
 
         $manager->persist($conference);
 
@@ -32,6 +32,9 @@ class AppFixtures extends Fixture
             'Track 2 is for a targeted audience. ' .
             'Viewers will benefit the most if they have some existing technical knowledge'
         );
+        $settings->setIntroduction('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet asperiores blanditiis
+            est neque, quas quis unde voluptatum? Accusantium autem dolore eaque impedit libero, nobis officia quam
+            repellendus? Atque, nobis repellat!');
 
         $manager->persist($settings);
 
