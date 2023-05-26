@@ -50,6 +50,6 @@ class OAuthUserProvider implements UserProviderInterface
 
     private function isAdmin(string $email): bool
     {
-        return in_array($email, self::$defaultAdmins, true) || $this->admins->findOneBy(compact('email'));
+        return in_array($email, self::$defaultAdmins, true) || $this->admins->findAdminByEmail($email);
     }
 }
