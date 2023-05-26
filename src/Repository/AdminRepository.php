@@ -19,6 +19,16 @@ class AdminRepository extends ServiceEntityRepository
         parent::__construct($registry, Admin::class);
     }
 
+    public function findAdminByEmail(string $email): ?Admin
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('lower(a.email) = lower(:email)')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     // /**
     //  * @return Admin[] Returns an array of Admin objects
     //  */
