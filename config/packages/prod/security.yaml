@@ -6,6 +6,6 @@ security:
         main:
             provider: oauth_users
             custom_authenticators:
-                - App\Security\GoogleAuthenticator
+                - App\Security\AzureAuthenticator
             logout:
                 path: app_logout
