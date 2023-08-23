@@ -49,7 +49,7 @@ class AzureAuthenticator extends OAuth2Authenticator implements AuthenticationEn
                 /** @var AzureResourceOwner $azureUser */
                 $azureUser = $client->fetchUserFromToken($accessToken);
 
-                return $this->userProvider->loadUserByIdentifier($azureUser->getId());
+                return $this->userProvider->loadUserByIdentifier($azureUser->getUpn());
             })
         );
     }
