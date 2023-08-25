@@ -22,6 +22,7 @@ use TheNetworg\OAuth2\Client\Provider\AzureResourceOwner;
 
 class AzureAuthenticator extends OAuth2Authenticator implements AuthenticationEntryPointInterface
 {
+    private const CLAIM_GROUPS = 'groups';
     private const GROUP_TECH_LEADS = '1e54b4d7-50fa-4303-a6fc-52325ae4e0f2';
 
     public function __construct(
@@ -55,7 +56,9 @@ class AzureAuthenticator extends OAuth2Authenticator implements AuthenticationEn
                 /** @var OAuthUser $user */
                 $user = $this->userProvider->loadUserByIdentifier($azureUser->getUpn());
 
-                if (in_array(self::GROUP_TECH_LEADS, $azureUser->claim('groups'), true)) {
+                $groups = $azureUser->claim(self::CLAIM_GROUPS);
+
+                if ($groups !== null && in_array(self::GROUP_TECH_LEADS, $groups, true)) {
                     $user->addRole('ROLE_ADMIN');
                 }
 

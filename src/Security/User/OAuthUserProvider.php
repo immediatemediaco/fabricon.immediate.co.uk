@@ -24,7 +24,7 @@ class OAuthUserProvider implements UserProviderInterface
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
         }
 
-        return $this->loadUserByIdentifier($user->getUserIdentifier());
+        return $user;
     }
 
     public function supportsClass($class): bool
