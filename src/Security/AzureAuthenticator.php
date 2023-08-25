@@ -56,9 +56,7 @@ class AzureAuthenticator extends OAuth2Authenticator implements AuthenticationEn
                 /** @var OAuthUser $user */
                 $user = $this->userProvider->loadUserByIdentifier($azureUser->getUpn());
 
-                $groups = $azureUser->claim(self::CLAIM_GROUPS);
-
-                if ($groups !== null && in_array(self::GROUP_TECH_LEADS, $groups, true)) {
+                if ($this->isTechLead($azureUser)) {
                     $user->addRole('ROLE_ADMIN');
                 }
 
@@ -79,5 +77,12 @@ class AzureAuthenticator extends OAuth2Authenticator implements AuthenticationEn
         $message = strtr($exception->getMessageKey(), $exception->getMessageData());
 
         return new Response($message, Response::HTTP_FORBIDDEN);
+    }
+
+    private function isTechLead(AzureResourceOwner $azureUser): bool
+    {
+        $groups = $azureUser->claim(self::CLAIM_GROUPS);
+
+        return $groups !== null && in_array(self::GROUP_TECH_LEADS, $groups, true);
     }
 }
