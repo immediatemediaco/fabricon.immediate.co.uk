@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security;
 
+use App\Security\User\OAuthUser;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\OAuth2Authenticator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,6 +22,8 @@ use TheNetworg\OAuth2\Client\Provider\AzureResourceOwner;
 
 class AzureAuthenticator extends OAuth2Authenticator implements AuthenticationEntryPointInterface
 {
+    private const GROUP_TECH_LEADS = '1e54b4d7-50fa-4303-a6fc-52325ae4e0f2';
+
     public function __construct(
         private ClientRegistry $clientRegistry,
         private RouterInterface $router,
@@ -49,7 +52,14 @@ class AzureAuthenticator extends OAuth2Authenticator implements AuthenticationEn
                 /** @var AzureResourceOwner $azureUser */
                 $azureUser = $client->fetchUserFromToken($accessToken);
 
-                return $this->userProvider->loadUserByIdentifier($azureUser->getUpn());
+                /** @var OAuthUser $user */
+                $user = $this->userProvider->loadUserByIdentifier($azureUser->getUpn());
+
+                if (in_array(self::GROUP_TECH_LEADS, $azureUser->claim('groups'), true)) {
+                    $user->addRole('ROLE_ADMIN');
+                }
+
+                return $user;
             })
         );
     }
