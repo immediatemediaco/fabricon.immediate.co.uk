@@ -10,6 +10,7 @@ use App\Entity\Settings;
 use App\Entity\Slot;
 use App\Entity\Suggestion;
 use App\Entity\Talk;
+use App\Entity\Theme;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -71,6 +72,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Questions', 'fas fa-question-circle', Question::class);
         yield MenuItem::linkToCrud('Suggestions', 'fas fa-exclamation-circle', Suggestion::class);
         yield MenuItem::linkToCrud('Admins', 'fa fa-users-cog', Admin::class);
+        yield MenuItem::linkToCrud('Themes', 'fa-solid fa-palette', Theme::class);
         yield MenuItem::linkToCrud('Settings', 'fa fa-gear', Settings::class)
             ->setAction(Action::DETAIL)
             ->setEntityId(1);
