@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Admin;
 use App\Entity\Conference;
 use App\Entity\Person;
 use App\Entity\Question;
@@ -71,7 +70,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('People', 'fa fa-users', Person::class);
         yield MenuItem::linkToCrud('Questions', 'fas fa-question-circle', Question::class);
         yield MenuItem::linkToCrud('Suggestions', 'fas fa-exclamation-circle', Suggestion::class);
-        yield MenuItem::linkToCrud('Admins', 'fa fa-users-cog', Admin::class);
         yield MenuItem::linkToCrud('Themes', 'fa-solid fa-palette', Theme::class);
         yield MenuItem::linkToCrud('Settings', 'fa fa-gear', Settings::class)
             ->setAction(Action::DETAIL)
