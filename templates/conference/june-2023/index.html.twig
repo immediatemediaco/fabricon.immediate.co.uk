@@ -116,11 +116,25 @@
                         {{ slot.track2.description | raw }}
                     {% endif %}
                 </div>
+                <div class="session__footer">
                 {% if slot.track2.moderator %}
-                    <div class="session__footer">
-                        Moderated by {{ slot.track2.moderator }}
-                    </div>
+                    Moderated by {{ slot.track2.moderator }}
                 {% endif %}
+                {% if slot.track2.slackChannelUrl and slot.track2.slackChannel %}
+                    <a href="{{ slot.track2.slackChannelUrl }}" class="session__link" target="_blank"><i
+                                class="talk__icon icon icon--slack"></i>{{ slot.track2.slackChannel }}</a>
+                {% elseif slot.track2.slackChannel %}
+                    <p class="session__link"><i class="talk__icon icon icon--slack"></i>{{ slot.track2.slackChannel }}</p>
+                {% endif %}
+                {% if slot.track2.teamsUrl %}
+                    <a href="{{ slot.track2.teamsUrl }}" class="session__link" target="_blank"><i class="talk__icon icon icon--teams"></i>Join on Microsoft
+                        Teams</a>
+                {% endif %}
+                {% if slot.track2.slidoUrl %}
+                    <a href="{{ slot.track2.slidoUrl }}" class="session__link" target="_blank"><i
+                                class="talk__icon icon icon--slido"></i>{{ slot.track2.slidoText ?: slot.track2.slidoUrl }}</a>
+                {% endif %}
+                </div>
             </div>
             {% endif %}
             {% if slot.breakDetails %}
