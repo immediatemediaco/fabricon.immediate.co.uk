@@ -24,7 +24,7 @@ class ConferenceCrudController extends AbstractCrudController
     {
         return $crud
             ->setPageTitle(Crud::PAGE_INDEX, 'Conferences')
-            ->setDefaultSort(['date' => 'DESC']);
+            ->setDefaultSort(['startDate' => 'DESC']);
     }
 
     public function configureFields(string $pageName): iterable
@@ -32,7 +32,8 @@ class ConferenceCrudController extends AbstractCrudController
         yield TextField::new('name');
         yield SlugField::new('slug')->setTargetFieldName('name');
         yield TextField::new('siteTitle');
-        yield DateField::new('date');
+        yield DateField::new('startDate')->setLabel('Start Date');
+        yield DateField::new('endDate')->setLabel('End Date')->setHelp('Leave blank for a single-day conference');
         yield TextEditorField::new('about');
         yield TextField::new('slackChannel')->hideOnIndex();
         yield TextField::new('slackChannelUrl')->hideOnIndex();

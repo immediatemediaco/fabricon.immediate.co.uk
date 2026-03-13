@@ -27,8 +27,8 @@ class ConferenceController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $nextConference = $this->conferences->findNext($conference->getDate());
-        $previousConference = $this->conferences->findPrevious($conference->getDate());
+        $nextConference = $this->conferences->findNext($conference->getStartDate());
+        $previousConference = $this->conferences->findPrevious($conference->getStartDate());
 
         $loader = $this->twig->getLoader();
 

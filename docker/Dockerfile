@@ -24,6 +24,9 @@ RUN composer dump-autoload --classmap-authoritative; \
 COPY docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
+# Configure PHP-FPM to listen on all interfaces instead of just localhost
+RUN sed -i 's/listen = 127.0.0.1:9000/listen = 9000/g' /usr/local/etc/php-fpm.d/www.conf
+
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 
