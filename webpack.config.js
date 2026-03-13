@@ -28,6 +28,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('app-2023', './assets/app-2023.js')
+    .addEntry('app-2026', './assets/app-2026.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
