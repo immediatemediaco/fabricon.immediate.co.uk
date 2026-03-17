@@ -144,24 +144,6 @@ class Conference
         return $this->endDate !== null && $this->startDate->format('Y-m-d') !== $this->endDate->format('Y-m-d');
     }
 
-    /**
-     * @deprecated Use getStartDate() instead. This method exists for backward compatibility.
-     */
-    public function getDate(): ?DateTimeInterface
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * @deprecated Use setStartDate() instead. This method exists for backward compatibility.
-     */
-    public function setDate(?DateTimeInterface $date): self
-    {
-        $this->startDate = $date;
-
-        return $this;
-    }
-
     public function getSlackChannel(): ?string
     {
         return $this->slackChannel;
