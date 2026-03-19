@@ -1,0 +1,8 @@
+.container {
+  margin-inline: auto;
+  max-width: 90rem;
+}
+
+.main > .container {
+  background-color: var(--clr-neutral-100);
+}

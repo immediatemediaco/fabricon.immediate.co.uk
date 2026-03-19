@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ConferenceRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: ConferenceRepository::class)]
 class Conference
@@ -29,8 +31,12 @@ class Conference
     #[ORM\Column(type: 'boolean')]
     private bool $holdingPageEnabled = true;
 
+    #[ORM\Column(type: 'date')]
+    #[Assert\NotBlank(message: 'Start date is required')]
+    private ?DateTimeInterface $startDate = null;
+
     #[ORM\Column(type: 'date', nullable: true)]
-    private ?DateTimeInterface $date = null;
+    private ?DateTimeInterface $endDate = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $slackChannel = null;
@@ -109,16 +115,33 @@ class Conference
         return $this;
     }
 
-    public function getDate(): ?DateTimeInterface
+    public function getStartDate(): ?DateTimeInterface
     {
-        return $this->date;
+        return $this->startDate;
     }
 
-    public function setDate(?DateTimeInterface $date): self
+    public function setStartDate(?DateTimeInterface $startDate): self
     {
-        $this->date = $date;
+        $this->startDate = $startDate;
 
         return $this;
+    }
+
+    public function getEndDate(): ?DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(?DateTimeInterface $endDate): self
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    public function isMultiDay(): bool
+    {
+        return $this->endDate !== null && $this->startDate->format('Y-m-d') !== $this->endDate->format('Y-m-d');
     }
 
     public function getSlackChannel(): ?string
@@ -172,5 +195,15 @@ class Conference
         $this->theme = $theme;
 
         return $this;
+    }
+
+    #[Assert\Callback]
+    public function validateDateRange(ExecutionContextInterface $context): void
+    {
+        if ($this->endDate && $this->startDate && $this->endDate < $this->startDate) {
+            $context->buildViolation('End date must be on or after the start date')
+                ->atPath('endDate')
+                ->addViolation();
+        }
     }
 }

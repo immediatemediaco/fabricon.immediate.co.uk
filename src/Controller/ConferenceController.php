@@ -8,7 +8,7 @@ use App\Repository\SettingsRepository;
 use App\Repository\SlotRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Twig\Environment;
 
 class ConferenceController extends AbstractController
@@ -27,8 +27,8 @@ class ConferenceController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $nextConference = $this->conferences->findNext($conference->getDate());
-        $previousConference = $this->conferences->findPrevious($conference->getDate());
+        $nextConference = $this->conferences->findNext($conference->getStartDate());
+        $previousConference = $this->conferences->findPrevious($conference->getStartDate());
 
         $loader = $this->twig->getLoader();
 

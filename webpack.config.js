@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -17,8 +18,22 @@ Encore
     .copyFiles({
         from: './assets/images',
         to: 'images/[path][name].[hash:8].[ext]',
-        pattern: /\.(png|jpg)$/
+        pattern: /\.(png|jpg|jpeg)$/
     })
+
+    // Optimize images (compress PNGs and JPEGs in-place)
+    .addPlugin(new ImageMinimizerPlugin({
+        test: /\.(jpe?g|png)$/i,
+        minimizer: {
+            implementation: ImageMinimizerPlugin.imageminMinify,
+            options: {
+                plugins: [
+                    ['imagemin-mozjpeg', { quality: 75, progressive: true }],
+                    ['imagemin-pngquant', { quality: [0.65, 0.90], speed: 4 }],
+                ],
+            },
+        },
+    }))
 
     /*
      * ENTRY CONFIG
@@ -28,6 +43,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('app-2023', './assets/app-2023.js')
+    .addEntry('app-2026', './assets/app-2026.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

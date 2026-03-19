@@ -24,3 +24,7 @@ yarn-error.log
 ###> MacOS system files ###
 .DS_Store
 ###< MacOS system files ###
+
+###> Feature planning folder ###
+/_plans/
+###< Feature planning folder ###

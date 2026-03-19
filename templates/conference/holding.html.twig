@@ -7,7 +7,7 @@
     {% include 'components/navigation.twig' only %}
     {% include 'components/masthead.twig' with {
         title : conference.siteTitle,
-        subtitle: conference.date|date('d F Y') ~ ' – Hybrid (Vineyard House and Microsoft Teams)'
+        subtitle: conference|conference_date_range ~ ' – Hybrid (Vineyard House and Microsoft Teams)'
     } %}
 
     <section>

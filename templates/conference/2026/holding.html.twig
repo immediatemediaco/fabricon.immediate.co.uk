@@ -1,0 +1,56 @@
+{% extends 'base-2026.html.twig' %}
+
+{% block title conference.siteTitle %}
+
+{% block body %}
+    <nav class="nav">
+        <div class="container">
+            <div class="nav__logo">
+                <img srcset="{{ asset('build/images/fabric-con.png') }} 1x, {{ asset('build/images/fabric-con.png') }} 2x"
+                     src="{{ asset('build/images/fabric-con.png') }}"
+                     width="120"
+                     alt="Logo"
+                />
+            </div>
+        </div>
+    </nav>
+    <header class="masthead container">
+        <picture class="masthead__picture">
+            <source media="(max-width: 600px)" srcset="{{ asset('build/images/room-23-square.png') }}">
+            <source media="(max-width: 1023px)" srcset="{{ asset('build/images/room-23.png') }}">
+            <source media="(min-width: 1024px)" srcset="{{ asset('build/images/room-23.png') }}">
+            <img alt="Masthead image" src="{{ asset('build/images/room-23.png') }}">
+        </picture>
+        <div class="masthead__heading">
+            <h1 class="masthead__title">{{ conference.siteTitle }}</h1>
+            <div class="masthead__title-underline"><span></span></div>
+        </div>
+    </header>
+    <main class="conference container">
+        <section class="conference__intro">
+            <div class="conference__intro-content">
+                {% if settings.introduction %}
+                    <h2 class="conference__intro-title">About the event</h2>
+                    <p class="conference__intro-lead">
+                        The next conference will be on <strong>{{ conference|conference_date_range }}</strong>.
+                    </p>
+                    {{ render(controller('App\\Controller\\SuggestionController::new')) }}
+                    <p>{{ settings.introduction|raw }}</p>
+                {% else %}
+                    <h2 class="conference__intro-title">... COMING SOON ...</h2>
+                {% endif %}
+            </div>
+            <div class="conference__intro-img">
+                <img src="{{ asset('build/images/garden-23.png') }}"
+                     alt="Intro image 1">
+                <img src="{{ asset('build/images/posters-25.png') }}"
+                     alt="Intro image 2">
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <img class="footer__logo" src="{{ asset('build/images/im-logo.png') }}" alt="Immediate Media" width="150"
+             height="60" loading="lazy">
+        <p class="footer__copy">&copy; 2020-{{ "now"|date("Y") }} Copyright Immediate Media Co.</p>
+    </footer>
+{% endblock %}

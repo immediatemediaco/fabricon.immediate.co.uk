@@ -12,7 +12,7 @@ class OAuthUser implements UserInterface
     ) {
     }
 
-    public function getRoles(): ?array
+    public function getRoles(): array
     {
         return $this->roles;
     }

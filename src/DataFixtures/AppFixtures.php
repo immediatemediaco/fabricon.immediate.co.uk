@@ -21,7 +21,8 @@ class AppFixtures extends Fixture
         $conference->setName('June 2023');
         $conference->setSlug('june-2023');
         $conference->setSiteTitle('FabriCon June 2023');
-        $conference->setDate(DateTime::createFromFormat('j-M-Y', '9-June-2023'));
+        $conference->setStartDate(DateTime::createFromFormat('j-M-Y', '9-June-2023'));
+        // Single-day conference, so endDate is null
 
         $manager->persist($conference);
 

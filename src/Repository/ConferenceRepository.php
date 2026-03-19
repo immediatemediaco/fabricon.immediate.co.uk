@@ -23,7 +23,7 @@ class ConferenceRepository extends ServiceEntityRepository
     public function findNext(DateTimeInterface $date): ?Conference
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.date > :date')
+            ->andWhere('c.startDate > :date')
             ->setParameter('date', $date)
             ->setMaxResults(1)
             ->getQuery()
@@ -33,7 +33,7 @@ class ConferenceRepository extends ServiceEntityRepository
     public function findPrevious(DateTimeInterface $date): ?Conference
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.date < :date')
+            ->andWhere('c.startDate < :date')
             ->setParameter('date', $date)
             ->setMaxResults(1)
             ->getQuery()
