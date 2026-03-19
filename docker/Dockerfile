@@ -9,7 +9,7 @@ ENV APP_ENV=prod
 COPY ./composer.* ./symfony.lock ./
 
 RUN set -xe; \
-    composer install --prefer-dist --no-dev --no-scripts --no-progress --ignore-platform-reqs --no-interaction; \
+    composer install --prefer-dist --no-dev --no-scripts --no-progress --no-interaction; \
     composer clear-cache;
 
 COPY . ./
@@ -27,7 +27,7 @@ ENTRYPOINT ["docker-entrypoint"]
 
 CMD ["php-fpm"]
 
-FROM nginx:1.23-alpine as web
+FROM nginx:1.27-alpine as web
 
 WORKDIR /var/www/html
 
