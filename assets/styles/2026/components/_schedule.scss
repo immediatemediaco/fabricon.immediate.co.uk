@@ -60,10 +60,10 @@
   &__day-grid {
     display: grid;
     grid-template-columns: var(--gutter) 1fr 1fr var(--gutter);
-    grid-template-rows: repeat(var(--day-total-rows, 1), minmax(6px, 1fr));
+    grid-template-rows: repeat(var(--day-total-rows, 1), minmax(var(--schedule-row-height, 10px), auto));
     background: linear-gradient(90deg, var(--clr-neutral-200) 50%, hsl(var(--clr-neutral-hsl-200) / 0.5) 50%);
     padding-block-end: var(--padding);
-    align-items: start;
+    align-items: stretch;
   }
 
   &__break {
