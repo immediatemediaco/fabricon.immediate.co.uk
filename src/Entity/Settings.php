@@ -17,12 +17,6 @@ class Settings
     private ?Conference $currentConference = null;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $track1Description = null;
-
-    #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $track2Description = null;
-
-    #[ORM\Column(type: 'text', nullable: true)]
     private ?string $conferenceDetails = null;
 
     #[ORM\Column(type: 'text', nullable: true)]
@@ -41,30 +35,6 @@ class Settings
     public function setCurrentConference(?Conference $currentConference): self
     {
         $this->currentConference = $currentConference;
-
-        return $this;
-    }
-
-    public function getTrack1Description(): ?string
-    {
-        return $this->track1Description;
-    }
-
-    public function setTrack1Description(?string $track1Description): self
-    {
-        $this->track1Description = $track1Description;
-
-        return $this;
-    }
-
-    public function getTrack2Description(): ?string
-    {
-        return $this->track2Description;
-    }
-
-    public function setTrack2Description(?string $track2Description): self
-    {
-        $this->track2Description = $track2Description;
 
         return $this;
     }

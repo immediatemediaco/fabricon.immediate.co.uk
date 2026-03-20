@@ -14,6 +14,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
@@ -35,7 +37,7 @@ class ScheduleCrudController extends AbstractCrudController
     {
         return $crud
             ->setPageTitle(Crud::PAGE_INDEX, [$this, 'indexPageTitle'])
-            ->setDefaultSort(['startTime' => 'ASC'])
+            ->setDefaultSort(['date' => 'ASC', 'startTime' => 'ASC', 'track' => 'ASC'])
             ->setTimeFormat('H:mm');
     }
 
@@ -47,6 +49,9 @@ class ScheduleCrudController extends AbstractCrudController
     ): QueryBuilder {
         $queryBuilder = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
         $queryBuilder->innerJoin(Settings::class, 's', Join::WITH, 'entity.conference = s.currentConference');
+        $queryBuilder->addOrderBy('entity.date', 'ASC')
+            ->addOrderBy('entity.startTime', 'ASC')
+            ->addOrderBy('entity.track', 'ASC');
 
         return $queryBuilder;
     }
@@ -61,12 +66,16 @@ class ScheduleCrudController extends AbstractCrudController
             ->hideOnIndex();
         yield FormField::addPanel('Slot Details')
             ->setIcon('fa fa-clock');
+        yield DateField::new('date');
         yield TimeField::new('startTime');
         yield TimeField::new('endTime');
         yield FormField::addPanel('Talk Details')
             ->setIcon('fa fa-chalkboard-teacher');
-        yield AssociationField::new('track1', 'Track 1');
-        yield AssociationField::new('track2', 'Track 2');
+        yield AssociationField::new('talk', 'Talk');
+        yield ChoiceField::new('track', 'Track')
+            ->setChoices(['' => null, 'Track 1' => 1, 'Track 2' => 2])
+            ->allowMultipleChoices(false)
+            ->renderExpanded(false);
         yield FormField::addPanel('Break Details')
             ->setIcon('fa fa-mug-hot');
         yield TextField::new('breakDetails');

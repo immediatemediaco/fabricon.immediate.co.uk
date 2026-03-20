@@ -21,10 +21,13 @@ class Slot
     private ?DateTimeInterface $endTime = null;
 
     #[ORM\ManyToOne(targetEntity: Talk::class)]
-    private ?Talk $track1 = null;
+    private ?Talk $talk = null;
 
-    #[ORM\ManyToOne(targetEntity: Talk::class)]
-    private ?Talk $track2 = null;
+    #[ORM\Column(type: 'smallint', nullable: true)]
+    private ?int $track = null;
+
+    #[ORM\Column(type: 'date')]
+    private ?DateTimeInterface $date = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $breakDetails = null;
@@ -62,28 +65,45 @@ class Slot
         return $this;
     }
 
-    public function getTrack1(): ?Talk
+    public function getTalk(): ?Talk
     {
-        return $this->track1;
+        return $this->talk;
     }
 
-    public function setTrack1(?Talk $track1): self
+    public function setTalk(?Talk $talk): self
     {
-        $this->track1 = $track1;
+        $this->talk = $talk;
 
         return $this;
     }
 
-    public function getTrack2(): ?Talk
+    public function getTrack(): ?int
     {
-        return $this->track2;
+        return $this->track;
     }
 
-    public function setTrack2(?Talk $track2): self
+    public function setTrack(?int $track): self
     {
-        $this->track2 = $track2;
+        $this->track = $track;
 
         return $this;
+    }
+
+    public function getDate(): ?DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(?DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function isBreak(): bool
+    {
+        return !empty($this->breakDetails);
     }
 
     public function getBreakDetails(): ?string

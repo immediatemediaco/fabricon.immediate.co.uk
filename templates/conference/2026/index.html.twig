@@ -60,91 +60,116 @@
             <div class="schedule__heading">
                 <h2 class="schedule__title">Schedule</h2>
             </div>
-            <div class="track__heading">
-                <h3 class="track__title">Track 1 - {{ settings.track1Description }}</h3>
-                <h3 class="track__title">Track 2 - {{ settings.track2Description }}</h3>
+            {% if scheduleData.days|length > 1 %}
+            <div class="schedule__day-tabs">
+                {% for day in scheduleData.days %}
+                <button class="schedule__day-tab{% if loop.first %} is-active{% endif %}"
+                        data-day="{{ day.dateKey }}"
+                        onclick="showScheduleDay('{{ day.dateKey }}', this)">
+                    {{ day.date|date('D j M') }}
+                </button>
+                {% endfor %}
             </div>
-            {% for slot in schedule %}
-            {% if slot.track1 %}
-            <div class="session session__track--1">
-                <div class="session__heading">
-                    <div class="session__people">{{ slot.track1.speakers|join(', ') }}</div>
-                    <div class="session__time">
-                        {{ slot.startTime|date('H:i') }}-{{ slot.endTime|date('H:i') }}
+            {% endif %}
+            {% for day in scheduleData.days %}
+            <div class="schedule__day{% if scheduleData.days|length > 1 and not loop.first %} is-hidden{% endif %}"
+                 id="day-{{ day.dateKey }}">
+                {% if scheduleData.days|length > 1 %}
+                <div class="schedule__day-heading">Day {{ loop.index }} — {{ day.dateFormatted }}</div>
+                {% endif %}
+                <div class="track__heading">
+                    <h3 class="track__title">{{ conference.track1Description }}</h3>
+                    <h3 class="track__title">{{ conference.track2Description }}</h3>
+                </div>
+                <div class="schedule__day-grid" style="--day-total-rows: {{ day.totalRows }}">
+                    {% for slotData in day.track1Slots %}
+                    {% set slot = slotData.slot %}
+                    <div class="session session__track--1"
+                         style="--grid-row-start: {{ slotData.gridRowStart }}; --grid-row-end: {{ slotData.gridRowEnd }}">
+                        <div class="session__heading">
+                            <div class="session__people">{{ slot.talk.speakers|join(', ') }}</div>
+                            <div class="session__time">
+                                {{ slot.startTime|date('H:i') }}-{{ slot.endTime|date('H:i') }}
+                            </div>
+                        </div>
+                        <h5 class="session__title">{{- slot.talk.title -}}</h5>
+                        <div class="session__location">{{ conference.track1Description }}</div>
+                        <div class="session__content">
+                            {% if slot.talk.description %}
+                                {{ slot.talk.description | raw }}
+                            {% endif %}
+                        </div>
+                        <div class="session__footer">
+                        {% if slot.talk.moderator %}
+                            Moderated by {{ slot.talk.moderator }}
+                        {% endif %}
+                        {% if slot.talk.slackChannelUrl and slot.talk.slackChannel %}
+                            <a href="{{ slot.talk.slackChannelUrl }}" class="session__link" target="_blank"><i
+                                        class="talk__icon icon icon--slack"></i>{{ slot.talk.slackChannel }}</a>
+                        {% elseif slot.talk.slackChannel %}
+                            <p class="session__link"><i class="talk__icon icon icon--slack"></i>{{ slot.talk.slackChannel }}</p>
+                        {% endif %}
+                        {% if slot.talk.teamsUrl %}
+                            <a href="{{ slot.talk.teamsUrl }}" class="session__link" target="_blank"><i class="talk__icon icon icon--teams"></i>Join on Microsoft
+                                Teams</a>
+                        {% endif %}
+                        {% if slot.talk.slidoUrl %}
+                            <a href="{{ slot.talk.slidoUrl }}" class="session__link" target="_blank"><i
+                                        class="talk__icon icon icon--slido"></i>{{ slot.talk.slidoText ?: slot.talk.slidoUrl }}</a>
+                        {% endif %}
+                        </div>
                     </div>
-                </div>
-                <h5 class="session__title">{{- slot.track1.title -}}</h5>
-                <div class="session__location">{{ settings.track1Description }}</div>
-                <div class="session__content">
-                    {% if slot.track1.description %}
-                        {{ slot.track1.description | raw }}
-                    {% endif %}
-                </div>
-                <div class="session__footer">
-                {% if slot.track1.moderator %}
-                    Moderated by {{ slot.track1.moderator }}
-                {% endif %}
-                {% if slot.track1.slackChannelUrl and slot.track1.slackChannel %}
-                    <a href="{{ slot.track1.slackChannelUrl }}" class="session__link" target="_blank"><i
-                                class="talk__icon icon icon--slack"></i>{{ slot.track1.slackChannel }}</a>
-                {% elseif slot.track1.slackChannel %}
-                    <p class="session__link"><i class="talk__icon icon icon--slack"></i>{{ slot.track1.slackChannel }}</p>
-                {% endif %}
-                {% if slot.track1.teamsUrl %}
-                    <a href="{{ slot.track1.teamsUrl }}" class="session__link" target="_blank"><i class="talk__icon icon icon--teams"></i>Join on Microsoft
-                        Teams</a>
-                {% endif %}
-                {% if slot.track1.slidoUrl %}
-                    <a href="{{ slot.track1.slidoUrl }}" class="session__link" target="_blank"><i
-                                class="talk__icon icon icon--slido"></i>{{ slot.track1.slidoText ?: slot.track1.slidoUrl }}</a>
-                {% endif %}
-                </div>
-            </div>
-            {% endif %}
-            {% if slot.track2 %}
-            <div class="session session__track--2">
-                <div class="session__heading">
-                    <div class="session__people">{{ slot.track2.speakers|join(', ') }}</div>
-                    <div class="session__time">
-                        {{ slot.startTime|date('H:i') }}-{{ slot.endTime|date('H:i') }}
+                    {% endfor %}
+                    {% for slotData in day.track2Slots %}
+                    {% set slot = slotData.slot %}
+                    <div class="session session__track--2"
+                         style="--grid-row-start: {{ slotData.gridRowStart }}; --grid-row-end: {{ slotData.gridRowEnd }}">
+                        <div class="session__heading">
+                            <div class="session__people">{{ slot.talk.speakers|join(', ') }}</div>
+                            <div class="session__time">
+                                {{ slot.startTime|date('H:i') }}-{{ slot.endTime|date('H:i') }}
+                            </div>
+                        </div>
+                        <h5 class="session__title">{{- slot.talk.title -}}</h5>
+                        <div class="session__location">{{ conference.track2Description }}</div>
+                        <div class="session__content">
+                            {% if slot.talk.description %}
+                                {{ slot.talk.description | raw }}
+                            {% endif %}
+                        </div>
+                        <div class="session__footer">
+                        {% if slot.talk.moderator %}
+                            Moderated by {{ slot.talk.moderator }}
+                        {% endif %}
+                        {% if slot.talk.slackChannelUrl and slot.talk.slackChannel %}
+                            <a href="{{ slot.talk.slackChannelUrl }}" class="session__link" target="_blank"><i
+                                        class="talk__icon icon icon--slack"></i>{{ slot.talk.slackChannel }}</a>
+                        {% elseif slot.talk.slackChannel %}
+                            <p class="session__link"><i class="talk__icon icon icon--slack"></i>{{ slot.talk.slackChannel }}</p>
+                        {% endif %}
+                        {% if slot.talk.teamsUrl %}
+                            <a href="{{ slot.talk.teamsUrl }}" class="session__link" target="_blank"><i class="talk__icon icon icon--teams"></i>Join on Microsoft
+                                Teams</a>
+                        {% endif %}
+                        {% if slot.talk.slidoUrl %}
+                            <a href="{{ slot.talk.slidoUrl }}" class="session__link" target="_blank"><i
+                                        class="talk__icon icon icon--slido"></i>{{ slot.talk.slidoText ?: slot.talk.slidoUrl }}</a>
+                        {% endif %}
+                        </div>
                     </div>
-                </div>
-                <h5 class="session__title">{{- slot.track2.title -}}</h5>
-                <div class="session__location">{{ settings.track2Description }}</div>
-                <div class="session__content">
-                    {% if slot.track2.description %}
-                        {{ slot.track2.description | raw }}
-                    {% endif %}
-                </div>
-                <div class="session__footer">
-                {% if slot.track2.moderator %}
-                    Moderated by {{ slot.track2.moderator }}
-                {% endif %}
-                {% if slot.track2.slackChannelUrl and slot.track2.slackChannel %}
-                    <a href="{{ slot.track2.slackChannelUrl }}" class="session__link" target="_blank"><i
-                                class="talk__icon icon icon--slack"></i>{{slot.track2.slackChannel }}</a>
-                {% elseif slot.track2.slackChannel %}
-                    <p class="session__link"><i class="talk__icon icon icon--slack"></i>{{ slot.track2.slackChannel }}</p>
-                {% endif %}
-                {% if slot.track2.teamsUrl %}
-                    <a href="{{ slot.track2.teamsUrl }}" class="session__link" target="_blank"><i class="talk__icon icon icon--teams"></i>Join on Microsoft
-                        Teams</a>
-                {% endif %}
-                {% if slot.track2.slidoUrl %}
-                    <a href="{{ slot.track2.slidoUrl }}" class="session__link" target="_blank"><i
-                                class="talk__icon icon icon--slido"></i>{{ slot.track2.slidoText ?: slot.track2.slidoUrl }}</a>
-                {% endif %}
+                    {% endfor %}
+                    {% for slotData in day.breaks %}
+                    {% set slot = slotData.slot %}
+                    <div class="schedule__break"
+                         style="--grid-row-start: {{ slotData.gridRowStart }}; --grid-row-end: {{ slotData.gridRowEnd }}">
+                        <h4 class="schedule__break-text">{{ slot.breakDetails }}</h4>
+                        <p class="schedule__break-time">
+                            {{ slot.startTime|date('H:i') }}-{{ slot.endTime|date('H:i') }}
+                        </p>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
-            {% endif %}
-            {% if slot.breakDetails %}
-            <div class="schedule__break">
-                <h4 class="schedule__break-text">{{ slot.breakDetails }}</h4>
-                <p class="schedule__break-time">
-                    {{ slot.startTime|date('H:i') }}-{{ slot.endTime|date('H:i') }}
-                </p>
-            </div>
-            {% endif %}
             {% endfor %}
         </section>
     </main>
@@ -153,4 +178,14 @@
              height="60" loading="lazy">
         <p class="footer__copy">&copy; 2020-{{ "now"|date("Y") }} Copyright Immediate Media Co.</p>
     </footer>
+    {% if scheduleData.days|length > 1 %}
+    <script>
+    function showScheduleDay(dateKey, btn) {
+        document.querySelectorAll('.schedule__day').forEach(function(el) { el.classList.add('is-hidden'); });
+        document.querySelectorAll('.schedule__day-tab').forEach(function(el) { el.classList.remove('is-active'); });
+        document.getElementById('day-' + dateKey).classList.remove('is-hidden');
+        btn.classList.add('is-active');
+    }
+    </script>
+    {% endif %}
 {% endblock %}

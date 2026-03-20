@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -39,6 +40,8 @@ class ConferenceCrudController extends AbstractCrudController
         yield TextField::new('slackChannelUrl')->hideOnIndex();
         yield TextField::new('feedbackFormUrl')->hideOnIndex();
         yield BooleanField::new('holdingPageEnabled');
+        yield TextareaField::new('track1Description', 'Track 1 Description')->hideOnIndex();
+        yield TextareaField::new('track2Description', 'Track 2 Description')->hideOnIndex();
         yield AssociationField::new('theme')
             ->setQueryBuilder(fn(QueryBuilder $qb) => $this->sortThemes($qb))
             ->hideOnIndex();

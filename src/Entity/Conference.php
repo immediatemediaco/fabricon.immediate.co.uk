@@ -47,6 +47,12 @@ class Conference
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $feedbackFormUrl = null;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $track1Description = null;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $track2Description = null;
+
     #[ORM\ManyToOne(inversedBy: 'conferences')]
     private ?Theme $theme = null;
 
@@ -178,6 +184,58 @@ class Conference
         $this->feedbackFormUrl = $feedbackFormUrl;
 
         return $this;
+    }
+
+    public function getTrack1Description(): ?string
+    {
+        return $this->track1Description;
+    }
+
+    public function setTrack1Description(?string $track1Description): self
+    {
+        $this->track1Description = $track1Description;
+
+        return $this;
+    }
+
+    public function getTrack2Description(): ?string
+    {
+        return $this->track2Description;
+    }
+
+    public function setTrack2Description(?string $track2Description): self
+    {
+        $this->track2Description = $track2Description;
+
+        return $this;
+    }
+
+    /**
+     * Returns an array of DateTimeInterface objects for each day from startDate to endDate (inclusive).
+     * For single-day conferences (endDate is null or equals startDate), returns [$this->startDate].
+     *
+     * @return \DateTimeInterface[]
+     */
+    public function getDays(): array
+    {
+        if (!$this->startDate) {
+            return [];
+        }
+
+        if (!$this->endDate || $this->startDate->format('Y-m-d') === $this->endDate->format('Y-m-d')) {
+            return [$this->startDate];
+        }
+
+        $days = [];
+        $current = \DateTime::createFromFormat('Y-m-d', $this->startDate->format('Y-m-d'));
+        $end = \DateTime::createFromFormat('Y-m-d', $this->endDate->format('Y-m-d'));
+
+        while ($current <= $end) {
+            $days[] = \DateTimeImmutable::createFromMutable($current);
+            $current->modify('+1 day');
+        }
+
+        return $days;
     }
 
     public function __toString(): string

@@ -22,17 +22,17 @@ class AppFixtures extends Fixture
         $conference->setSlug('june-2023');
         $conference->setSiteTitle('FabriCon June 2023');
         $conference->setStartDate(DateTime::createFromFormat('j-M-Y', '9-June-2023'));
+        $conference->setTrack1Description('Track 1 is for everyone. No technical knowledge about Fabric is required');
+        $conference->setTrack2Description(
+            'Track 2 is for a targeted audience. ' .
+            'Viewers will benefit the most if they have some existing technical knowledge'
+        );
         // Single-day conference, so endDate is null
 
         $manager->persist($conference);
 
         $settings = new Settings();
         $settings->setCurrentConference($conference);
-        $settings->setTrack1Description('Track 1 is for everyone. No technical knowledge about Fabric is required');
-        $settings->setTrack2Description(
-            'Track 2 is for a targeted audience. ' .
-            'Viewers will benefit the most if they have some existing technical knowledge'
-        );
         $settings->setIntroduction('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet asperiores blanditiis
             est neque, quas quis unde voluptatum? Accusantium autem dolore eaque impedit libero, nobis officia quam
             repellendus? Atque, nobis repellat!');
