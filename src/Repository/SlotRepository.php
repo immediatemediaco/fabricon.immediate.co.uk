@@ -28,7 +28,7 @@ class SlotRepository extends ServiceEntityRepository
             ->setParameter('conference', $conference)
             ->orderBy('s.date', 'ASC')
             ->addOrderBy('s.startTime', 'ASC')
-            ->addOrderBy('COALESCE(s.track, 0)', 'ASC')
+            ->addOrderBy('s.track', 'ASC')
             ->getQuery()
             ->getResult();
     }

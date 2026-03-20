@@ -73,7 +73,9 @@ class ScheduleCrudController extends AbstractCrudController
             ->setIcon('fa fa-chalkboard-teacher');
         yield AssociationField::new('talk', 'Talk');
         yield ChoiceField::new('track', 'Track')
-            ->setChoices(['' => null, 'Track 1' => 1, 'Track 2' => 2])
+            ->setChoices(['Track 1' => 1, 'Track 2' => 2])
+            ->setRequired(false)
+            ->setFormTypeOption('placeholder', 'No track')
             ->allowMultipleChoices(false)
             ->renderExpanded(false);
         yield FormField::addPanel('Break Details')
